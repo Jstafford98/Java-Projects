@@ -16,11 +16,15 @@ public class PowerTest {
 		Power test = new Power() ;
 		
 		/**
-		 * This function tests all powers of 2 that can fit into the max integer value in Java (2147483647)
+		 * This function tests all powers of 2 that can fit into an integer value in Java
 		 */
-		for (int i = 1 ; i < 31 ; i++) {//This for loop excludes 2 to the powers of 0 and 31
+		for (int i = 1 ; i < 31 ; i++) {//This for loop excludes 2^0 and 2^31
+			//See if function detects all powers of 2
 			boolean isPow = test.isPowTwo((Math.pow(2, i))) ;
 			assertEquals(true,isPow) ;
+			//See if function will detect non-powers of 2
+			isPow = test.isPowTwo((Math.pow(3, i))) ;
+			assertEquals(false,isPow) ;
 		}
 	}
 

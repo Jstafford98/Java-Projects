@@ -1,0 +1,208 @@
+/**
+ * This program represents a Polynomial 
+ * @author Jordan Stafford
+ */
+
+import java.util.LinkedList;
+import java.util.Collections;
+
+public class Polynomial {
+
+	// Data Members
+	private LinkedList<Term> mTerms = new LinkedList<>();
+
+	/**
+	 * =======================================================================
+	 * 								Public Functions
+	 * =======================================================================
+	 */
+	//Constructors
+	/**
+	 * Defualt Constructor
+	 */
+	public Polynomial() {
+		mTerms = new LinkedList<>() ;
+	}
+	/**
+	 * Create a new Polynomial Object form an existing one
+	 * @param p - Polynomial Object used to create this object
+	 */
+	public Polynomial(Polynomial p) {
+		for(Term t: p.getTerms()) {
+			mTerms.add(new Term(t)) ;
+		}
+	}
+	/**
+	 * Create a new Polynomial Object from a String
+	 * @param p - String object used to create this object
+	 */
+	public Polynomial(String p) {
+		mTerms = parsePolynomial(p);
+		sort() ;
+	}
+	//Getters
+	/**
+	 * Get the list of Term objects
+	 * @return the list of Term objects
+	 */
+	public LinkedList<Term> getTerms() {
+		return mTerms;
+	}
+	/**
+	 * Get a Term object at a given index from the list of Term objects
+	 * @param i - index to get Term object from 
+	 * @return the Term object at i
+	 */
+	public Term getTerm(int i) {
+		return mTerms.get(i) ;
+	}
+	/**
+	 * Get the total terms in our list of Term obejcts
+	 * @return the total terms in our Term List
+	 */
+	public int getNumTerms() {
+		return mTerms.size();
+	}
+	//Setters
+	/**
+	 * Set our term list to a new term list
+	 * @param terms - the new list of Term objects to use
+	 */
+	public void setTerms(LinkedList<Term> terms) {
+		mTerms = terms ;
+		sort() ;
+	}
+	//Term Editing
+	/**
+	 * Add a term to our term list
+	 * @param term - the term to add to our list
+	 */
+	public void addTerm(Term term) {
+		if (!mTerms.contains(term)) {
+			int index = lookupTerm(term.getExponent()) ;
+			if (index > -1) {
+				mTerms.get(index).setCoefficient(mTerms.get(index).getCoefficient() + term.getCoefficient());
+				if (mTerms.get(index).getCoefficient() == 0)
+					mTerms.remove(index) ;
+				return ;
+			}
+		term.setHasX(true) ;
+		mTerms.add(term);
+		sort() ;
+		} else {
+			int index = mTerms.indexOf(term) ;
+			mTerms.get(index).setCoefficient(mTerms.get(index).getCoefficient() + term.getCoefficient());
+			if (mTerms.get(index).getCoefficient() == 0)
+				mTerms.remove(index) ;
+			return ;
+		}
+	}
+	/**
+	 * Remove a term from our list based on the term's properties
+	 * @param term - a String object to be used to locate Term in our list
+	 */
+	public void removeTerm(String term) {
+		Term tmp = parseTerm(term);
+		if (mTerms.contains(tmp)) {
+			mTerms.remove(mTerms.indexOf(tmp));
+		}
+	}
+	//Object Editing
+	/**
+	 * Add a Polynomial to our current Polynomial
+	 * @param p - Polynomial object to add to this
+	 */
+	public void add(Polynomial p) {
+		LinkedList<Term> tempTermList = p.getTerms();
+		for (int i = 0 ; i < tempTermList.size() ; i++) {
+			if (!mTerms.contains(tempTermList.get(i))) {
+				int index = lookupTerm(tempTermList.get(i).getExponent()) ;
+				if (index > -1) {
+					mTerms.get(index).setCoefficient(mTerms.get(index).getCoefficient() + tempTermList.get(i).getCoefficient());
+					if (mTerms.get(index).getCoefficient() == 0)
+						mTerms.remove(index) ;
+					continue ;
+				}
+				mTerms.add(tempTermList.get(i)) ;
+			}
+		}
+		sort() ;
+	}
+	/**
+	 * Clear all Term objects from our list
+	 */
+	public void clear() {
+		mTerms = new LinkedList<>() ;
+	}
+	//Overrides
+	@Override
+	public String toString() {
+		String output = "";
+
+		if (mTerms.size() == 0)
+			return "0" ;
+		
+		for (int i = 0 ; i < mTerms.size()-1 ; i++) {
+			if (mTerms.get(i).toString().equals(""))
+				continue ;
+			output += mTerms.get(i).toString() ;
+		}
+		output += mTerms.get(mTerms.size()-1).toString() ;
+		if (output.charAt(0) == '+' || output.charAt(0) == '-') {
+			output = output.substring(1) ;
+		}
+		return output;
+	}
+	/**
+	 * =======================================================================
+	 * 								Private Functions
+	 * =======================================================================
+	 */
+	//Internal Parsers
+	/**
+	 * Parse a polynomial term list from a polynomial string
+	 * @param polynomialString - String object to parse into a Polynomial
+	 * @return the parsed Polynomial Term List
+	 */
+	private LinkedList<Term> parsePolynomial(String polynomialString) {
+		LinkedList<Term> tmp = new LinkedList<>();
+		String[] polynomialTerms = polynomialString.split("\\+|-|\\*");
+		for (String currentTerm : polynomialTerms) {
+			Term temporary = parseTerm(currentTerm) ;
+			if (temporary.getExponent() >= 0)
+				tmp.add(parseTerm(currentTerm));
+		}
+		return tmp;
+	}
+	/**
+	 * Parse a new term from a String
+	 * @param termString - String object to parse into a Term object
+	 * @return the new Term object
+	 */
+	private Term parseTerm(String termString) {
+		if (termString.contains("^")) {
+			String[] parts = termString.split("\\^");
+			return new Term(Integer.valueOf(parts[1]), Integer.valueOf(parts[0]));
+		}
+		return new Term(Integer.valueOf(termString));
+	}
+	//Code Consolidation Functions
+	/**
+	 * Consolidates my list sorting calls into one function for more concise code
+	 */
+	private void sort() {
+		Collections.sort(mTerms) ;
+		Collections.reverse(mTerms);
+	}
+	/**
+	 * Finds index of a term in the list by Exponent
+	 * @param exponent - exponent value we are looking for
+	 * @return the index of the Term object with a matching exponent
+	 */
+	private int lookupTerm(int exponent) {
+		for (int i = 0 ; i <  mTerms.size(); i++)
+			if (mTerms.get(i).getExponent() == exponent)
+				return i ;
+		return -1 ;
+	}
+}

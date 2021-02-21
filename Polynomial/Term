@@ -1,0 +1,184 @@
+/**
+ * Term.java - This class represents a Term object within the Polynomial Class
+ * @author Jordan Stafford
+ */
+import java.util.InputMismatchException;
+
+public class Term implements Comparable {
+	
+	// Data Members
+	private int mExponent, mCoefficent;
+	private boolean hasX ;
+
+	// Constructors
+	/**
+	 * Default Constructor.
+	 */
+	public Term() {
+		this(1, 1);
+	}
+	/**
+	 * Create a new Term object from an existing Term
+	 * @param t - Term object used to create this term object
+	 */
+	public Term(Term t) {
+		mExponent = t.getExponent() ;
+		mCoefficent = t.getCoefficient() ;
+	}
+	/**
+	 * Create a new Term object from a String
+	 * @param term - String object parsed to create this term object
+	 */
+	public Term(String term) {
+		parseTerm(term) ;
+	}
+	/**
+	 * Create a new Term using only a coefficient. This function should be used for whole number Terms in a Polynomial.
+	 * @param coefficent - The value to be set as our coefficient for this Term object
+	 */
+	public Term(int coefficent) {
+		this(coefficent,1,coefficent == 1 || coefficent == -1);
+	}
+	/**
+	 * Create a new Term object using both a coefficient and exponent. This function should be used for Terms without an X inside them.
+	 * @param coefficent - The value to be set as our coefficient for this Term object
+	 * @param exponent - The value to be set as our exponent for this Term object
+	 */
+	public Term(int coefficent, int exponent) {
+		this(coefficent,exponent,coefficent == 1 || coefficent == -1) ;
+	}
+	/**
+	 * Create a new Term object using a coefficient, exponent, and x symbol. This function should be used for Terms containing an X symbol
+	 * @param coefficent - The value to be set as our coefficient for this Term object
+	 * @param exponent - The value to be set as our exponent for this Term object
+	 * @param hasX
+	 */
+	public Term(int coefficent, int exponent, boolean hasX) {
+		mExponent = exponent ;
+		mCoefficent = coefficent ;
+		this.hasX = hasX ;
+	}
+	// Getters
+	/**
+	 * Get this Term's exponent value
+	 * @return this Term's exponent value
+	 */
+	public int getExponent() {
+		return mExponent;
+	}
+	/**
+	 * Get this Term's coefficient value
+	 * @return this Term's coefficient value
+	 */
+	public int getCoefficient() {
+		return mCoefficent;
+	}
+	/**
+	 * Determine if this Term object should contain an X symbol
+	 * @return boolean value showing if this Term has an X symbol or not
+	 */
+	public boolean hasX() {
+		return hasX ;
+	}
+	// Setters
+	/**
+	 * Set this Term object's coefficient value
+	 * @param coefficent - new value of mCoefficient
+	 */
+	public void setCoefficient(int coefficent) {
+		mCoefficent = coefficent;
+		hasX = coefficent == 1 || coefficent == -1 ;
+	}
+	/**
+	 * Set this Term object's exponent value
+	 * @param exponent - future value of mExponent
+	 */
+	public void setExponent(int exponent) {
+		mExponent = exponent;
+		hasX = exponent != 0;
+	}
+	/**
+	 * Set this object to having an X value
+	 * @param b - future boolean value of hasX
+	 */
+	public void setHasX(boolean b) {
+		hasX = b ;
+	}
+	// Overrides
+	@Override
+	public int compareTo(Object o) {
+		if (!(o instanceof Term))
+			throw new InputMismatchException(
+					"ERROR: You may only compare objects of type Term to other objects of type Term");
+		else
+			return mExponent - ((Term) o).getExponent();
+	}
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		else if (o instanceof Term) {
+			Term other = (Term) o;
+			return mExponent == other.getExponent() && mCoefficent == other.getCoefficient();
+		}
+		return false;
+	}
+	@Override
+	public String toString() {
+		String sign = mCoefficent > 0 ? "+" : "", 
+			   returning_coefficent = mCoefficent == 1 || mCoefficent == -1 ? "" : String.valueOf(mCoefficent),
+			   end = hasX ? "x" : "";
+		if (mCoefficent == 0) 
+			return "" ;
+		if (mCoefficent == -1)
+			sign = "-" ;
+		return mExponent == 1 || mExponent == 0 ? sign + returning_coefficent + end : sign + returning_coefficent + end + "^" + String.valueOf(mExponent);
+	}
+	@Override
+	public Object clone() {
+		return new Term(this) ;
+	}
+	// Private Functions
+	/**
+	 * Parses this Term object's values from a string provided in the proper String constructor for Term
+	 * @param termString - the String the Term will be parsed from
+	 */
+	private void parseTerm(String termString) {
+		String[] parts = termString.split("\\^");
+		if (parts[0].equals("+x") || parts[0].contentEquals("-x")) {
+			mCoefficent = parts[0].contains("-") ? -1 : 1 ;
+			mExponent = parts.length == 2 ? Integer.parseInt(parts[1]) : 1 ;
+			hasX = false ;
+		} else if (termString.contains("^")) {  
+			String sign = parts[0].contains("-") ? "-" : "" ;
+			hasX = parts[0].contains("X") ;
+			mCoefficent = Integer.parseInt(sign + (parts[0].replaceAll("\\D+", ""))) ;
+			mExponent = Integer.parseInt(parts[1]) ;
+			
+		} else {
+			String sign = parts[0].contains("-") ? "-" : "" ;
+			hasX = termString.contains("x") ;
+			mCoefficent = Integer.parseInt(sign + termString.replaceAll("\\D+", "")) ;
+			mExponent = hasX ? 1 : 0 ;
+			
+		}
+	}
+	// Other
+	/**
+	 * Set both the coefficient and exponent values of this Term object
+	 * @param c - mCoefficient's future value
+	 * @param e - mExponent's future value
+	 */
+	public void setAll(int c, int e) {
+		setCoefficient(c) ;
+		setExponent(e) ;
+	}
+	/**
+	 * Increment this Term's coefficient without excessive function calls
+	 * @param coefficent - mCoefficient's future value
+	 */
+	public void incrementCoefficent(int coefficent) {
+		mCoefficent += coefficent ;
+		
+	}
+}

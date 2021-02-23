@@ -1,0 +1,211 @@
+import java.util.NoSuchElementException ;
+
+public class LinkedList<E> {
+
+    private Node mHead;
+
+    public LinkedList() {
+        mHead = null;
+    }
+    public int size() {
+        // Check to see if head is null, size is 0
+        if (mHead == null)
+            return 0;
+        // Initialize count to 1
+        int count = 1;
+        // Create current node, start it at head
+        Node current = mHead;
+        // Loop as long as next is NOT null
+        while (current.mNext != null) {
+            // Increment count
+            count++;
+            // Advance current to its next node
+            current = current.mNext;
+        }
+        return count;
+    }
+    public boolean add(E element) {
+        return add(size(), element);
+    }
+    public boolean add(int index, E element){
+        // Check for errors:
+        if (index < 0 || index > size())
+            throw new IndexOutOfBoundsException("Index must be between 0 and " + size());
+            
+        // Steps to inserting a new (fresh) Node
+        // Step 1) Move current to index - 1
+        Node current = mHead;
+        // i = 0,  index - 1 = 1
+        for (int i = 0; i < index - 1; i++)
+            current = current.mNext;
+
+        // Step 2) Create a new (fresh) Node
+        // data = element
+        // next = current.mNext
+        
+        if (index == 0)
+            mHead = new Node(element, mHead);
+        else
+            current.mNext = new Node(element, current.mNext);
+        return true;
+    }
+    public E remove(int index){
+        if (index < 0 || index >= size())
+            throw new IndexOutOfBoundsException("Index must be between 0 and " + size());
+
+        Node current = mHead;
+        for (int i = 0; i < index - 1; i++)
+            current = current.mNext;
+
+        Node temp = current.mNext;
+
+        // If index is 0, the head must move
+        if (index == 0)
+            mHead = mHead.mNext;
+        else
+            current.mNext = current.mNext.mNext;
+        return temp.mData;
+    }
+    public int indexOf(E element){
+        // Loop through the list to find element
+        Node current = mHead;
+        int listSize = size();
+        for (int i = 0; i < listSize; i++){
+            if (current.mData.equals(element))
+                return i;
+            current = current.mNext;
+        }
+        return -1;
+    }
+    public boolean remove(E element){
+        int index = indexOf(element);
+        if (index < 0)
+            return false;
+        remove(index);
+        return true;
+        
+    }
+    public E get(int index){
+        if (index < 0 || index >= size())
+        throw new IndexOutOfBoundsException("Index must be between 0 and " + size());
+        Node current = mHead;
+        for (int i = 0; i < index; i++)
+            current = current.mNext;
+        return current.mData;
+    }
+    @Override
+    public String toString(){
+        // Check if head is null
+        if (mHead == null)
+        return "[]";
+        // Otherwise, loop through collection
+        // and append to output
+        String output = "[";
+        Node current = mHead;
+        while (current.mNext != null)
+        {
+        output += current.mData + ", ";
+        current = current.mNext;
+        }
+        return output + current.mData + "]";
+    }
+    //======================================================================================================
+    //                                          Node
+    //======================================================================================================
+    class Node {
+        private E mData;
+        private Node mNext;
+
+        private Node(E data) {
+        this(data, null);
+        }
+
+        private Node(E data, Node next)
+        {
+        mData = data;
+        mNext = next;
+        }
+    }//End node
+    //======================================================================================================
+    //                                          List Iterator
+    //======================================================================================================
+    class ListIterator{
+
+        //Instance Variables
+        Node mPrevious, mNext ;
+        int mCursor, mLastIndex ;
+        boolean goingForward ;
+
+        public ListIterator(){
+            mPrevious = null ;
+            mNext = LinkedList.this.mHead ;
+            mCursor = 0 ;
+            goingForward = true ;
+        }
+        public void add(E element){
+            LinkedList.this.add(mLastIndex,element) ;
+        }
+        public boolean hasNext(){
+            return mNext != null ;
+        }
+        public boolean hasPrevious(){
+            return mPrevious != null ;
+        }
+        public E next(){
+            if (hasNext()){
+                goingForward = true ;
+                mPrevious = mNext ;
+                mNext = mNext.mNext ;
+                //mLastIndex = mCursor ;
+                mCursor++ ;
+                return mPrevious.mData ;
+            }
+            throw new NoSuchElementException() ;
+        }
+        public int nextIndex(){
+            return mCursor + 1 ;
+        }
+        public E previous(){
+            if (hasPrevious()){
+                goingForward = false ;
+                mNext = mPrevious ;
+                if (mNext == mHead)
+                    mPrevious = null ;
+                else {
+                    Node temp = LinkedList.this.mHead ;
+                    for (int i = 0 ; i < mCursor - 2 ; i++)
+                        temp = temp.mNext ;
+                    mPrevious = temp ;
+                }
+                mLastIndex = mCursor - 1 ;
+                mCursor-- ;
+                return mNext.mData ;
+            }
+            throw new NoSuchElementException() ;
+        }
+        public int previousIndex(){
+            return mCursor - 1 ;
+        }
+        public void remove(){
+            if (goingForward){
+                mLastIndex = mCursor - 1 ;
+                Node current = mHead ;
+                for (int i = 0 ; i < mCursor-2 ; i++){
+                    current = current.mNext ;
+                }
+                mPrevious = current ;
+                mCursor-- ;
+            } else {
+                mLastIndex = mCursor ;
+                mNext = mNext.mNext ;
+            }
+            LinkedList.this.remove(mLastIndex) ;
+        }
+        public void set(E element){
+            if (goingForward)
+                mPrevious.mData = element ;
+            else
+                mNext.mData = element ;
+        }
+    }//End iterator
+}//End class

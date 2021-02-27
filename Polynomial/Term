@@ -144,6 +144,7 @@ public class Term implements Comparable {
 	 * @param termString - the String the Term will be parsed from
 	 */
 	private void parseTerm(String termString) {
+		System.out.println("Parsing " + termString + " now" );
 		String[] parts = termString.split("\\^");
 		if (parts[0].equals("+x") || parts[0].contentEquals("-x")) {
 			mCoefficent = parts[0].contains("-") ? -1 : 1 ;
@@ -151,7 +152,7 @@ public class Term implements Comparable {
 			hasX = false ;
 		} else if (termString.contains("^")) {  
 			String sign = parts[0].contains("-") ? "-" : "" ;
-			hasX = parts[0].contains("X") ;
+			hasX = parts[0].contains("x") ;
 			mCoefficent = Integer.parseInt(sign + (parts[0].replaceAll("\\D+", ""))) ;
 			mExponent = Integer.parseInt(parts[1]) ;
 			
@@ -172,6 +173,7 @@ public class Term implements Comparable {
 	public void setAll(int c, int e) {
 		setCoefficient(c) ;
 		setExponent(e) ;
+		hasX = c == 1 || c == -1 || e != 0;
 	}
 	/**
 	 * Increment this Term's coefficient without excessive function calls

@@ -5,40 +5,61 @@ public class DirectoryEntry{
                  mNumber ;
 
   //Constructors
-  public DirectoryEntry(){
+  /**
+ * Creates a generic DirectoryEntry without parameters
+ */
+public DirectoryEntry(){
     this("Empty","0000000000") ;
   }
-  /**
-  * @param name
-  * @param number
-  */
-  public DirectoryEntry(String name, String number){
+ /**Creates a Directory Entry object
+ * @param name - the name of the person represented by the directory
+ * @param number - the number of the person represented by the directory
+ */
+public DirectoryEntry(String name, String number){
     mName = name ;
     mNumber = number ;
   }
 
   //Getters
-  public String getName(){
+  /**Returns the name
+ * @return - the name of the person represented by the directory
+ */
+public String getName(){
     return mName ;
   }
-  public String getNumber(){
+  /**Returns the number
+ * @return - the number of the person represented by the directory
+ */
+public String getNumber(){
     return mNumber ;
   }
 
   //Setters
-  public void setName(String name){
+  /** Sets the name
+ * @param name - the name of the person represented by the directory
+ */
+public void setName(String name){
     mName = name ;
   }
-  public void setNumber(String number){
+  /** Sets the number 
+ * @param number - the number of the person represented by the directory
+ */
+public void setNumber(String number){
     mNumber = number ;
   }
 
   //Other
-  @Override
+  /**
+ *	Returns a formatted string for display
+ */
+@Override
   public String toString(){
     return "Directory Entry[Name: " + mName + ", Number: " + mNumber + "]" ;
   }
-  @Override
+  /**
+ * Used to test equality of two objects
+ */
+@Override
   public boolean equals(Object o){
     if (this == o)
       return true ;

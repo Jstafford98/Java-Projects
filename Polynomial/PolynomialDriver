@@ -30,7 +30,7 @@ public class PolynomialDriver {
 						         "        (2) Remove Term\n"             + 
 								 "        (3) Display Polynomial\n"      + 
 						         "        (4) Confrim Polynomial\n"      + 
-								 "        (5) Quit Program\n"            );
+								 "        (5) Clear Polynomial\n"         );
 				switch (keyboard.next()) {
 				case "1":
 					addToPolynomial(i);
@@ -45,13 +45,16 @@ public class PolynomialDriver {
 					confirmed = true ;
 					break;
 				case "5":
-					keyboard.close();
-					System.exit(0);
+					if (i == 0)
+						poly1.clear() ;
+					else
+						poly2.clear() ;
 					break;
 				default:
 					System.out.println("No valid input");
 				}
-			} 
+			}
+			confirmed = false ;
 		}
 		System.out.println("Polynomial One: " + poly1.toString() + "\nPolynomial Two: " + poly2.toString());
 		poly1.add(poly2) ;

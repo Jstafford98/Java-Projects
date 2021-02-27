@@ -18,7 +18,7 @@ public class Polynomial {
 	 */
 	//Constructors
 	/**
-	 * Defualt Constructor
+	 * Default Constructor
 	 */
 	public Polynomial() {
 		mTerms = new LinkedList<>() ;
@@ -31,14 +31,6 @@ public class Polynomial {
 		for(Term t: p.getTerms()) {
 			mTerms.add(new Term(t)) ;
 		}
-	}
-	/**
-	 * Create a new Polynomial Object from a String
-	 * @param p - String object used to create this object
-	 */
-	public Polynomial(String p) {
-		mTerms = parsePolynomial(p);
-		sort() ;
 	}
 	//Getters
 	/**
@@ -86,9 +78,9 @@ public class Polynomial {
 					mTerms.remove(index) ;
 				return ;
 			}
-		term.setHasX(true) ;
-		mTerms.add(term);
-		sort() ;
+			term.setHasX(true) ;
+			mTerms.add(term);
+			sort() ;
 		} else {
 			int index = mTerms.indexOf(term) ;
 			mTerms.get(index).setCoefficient(mTerms.get(index).getCoefficient() + term.getCoefficient());
@@ -102,14 +94,16 @@ public class Polynomial {
 	 * @param term - the string to parse into our list
 	 */
 	public void addTerm(String term) {
-		mTerms.add(parseTerm(term)) ;
+		Term tmp = new Term(term) ;
+		addTerm(tmp) ;
+		
 	}
 	/**
 	 * Remove a term from our list based on the term's properties
 	 * @param term - a String object to be used to locate Term in our list
 	 */
 	public void removeTerm(String term) {
-		Term tmp = parseTerm(term);
+		Term tmp = new Term(term);
 		if (mTerms.contains(tmp)) {
 			mTerms.remove(mTerms.indexOf(tmp));
 		}
@@ -155,7 +149,7 @@ public class Polynomial {
 			output += mTerms.get(i).toString() ;
 		}
 		output += mTerms.get(mTerms.size()-1).toString() ;
-		if (output.charAt(0) == '+' || output.charAt(0) == '-') {
+		if (output.charAt(0) == '+' ) {
 			output = output.substring(1) ;
 		}
 		return output;
@@ -164,33 +158,6 @@ public class Polynomial {
 	 * =======================================================================
 	 * 								Private Functions
 	 * =======================================================================
-	 */
-	//Internal Parsers
-	/**
-	 * Parse a polynomial term list from a polynomial string
-	 * @param polynomialString - String object to parse into a Polynomial
-	 * @return the parsed Polynomial Term List
-	 */
-	private LinkedList<Term> parsePolynomial(String polynomialString) {
-		LinkedList<Term> tmp = new LinkedList<>();
-		String[] polynomialTerms = polynomialString.split("\\+|-|\\*");
-		for (String currentTerm : polynomialTerms) {
-			System.out.println("Before parsing: " + currentTerm);
-			Term temporary = parseTerm(currentTerm) ;
-			System.out.println("Adding term " + temporary.toString()) ;
-			if (temporary.getExponent() >= 0)
-				tmp.add(temporary);
-		}
-		return tmp;
-	}
-	/**
-	 * Parse a new term from a String
-	 * @param termString - String object to parse into a Term object
-	 * @return the new Term object
-	 */
-	private Term parseTerm(String termString) {
-		return new Term(termString) ;
-	}
 	//Code Consolidation Functions
 	/**
 	 * Consolidates my list sorting calls into one function for more concise code

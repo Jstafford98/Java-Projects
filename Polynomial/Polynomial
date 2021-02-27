@@ -98,6 +98,13 @@ public class Polynomial {
 		}
 	}
 	/**
+	 * Add a term to our term list
+	 * @param term - the string to parse into our list
+	 */
+	public void addTerm(String term) {
+		mTerms.add(parseTerm(term)) ;
+	}
+	/**
 	 * Remove a term from our list based on the term's properties
 	 * @param term - a String object to be used to locate Term in our list
 	 */
@@ -168,9 +175,11 @@ public class Polynomial {
 		LinkedList<Term> tmp = new LinkedList<>();
 		String[] polynomialTerms = polynomialString.split("\\+|-|\\*");
 		for (String currentTerm : polynomialTerms) {
+			System.out.println("Before parsing: " + currentTerm);
 			Term temporary = parseTerm(currentTerm) ;
+			System.out.println("Adding term " + temporary.toString()) ;
 			if (temporary.getExponent() >= 0)
-				tmp.add(parseTerm(currentTerm));
+				tmp.add(temporary);
 		}
 		return tmp;
 	}
@@ -180,11 +189,7 @@ public class Polynomial {
 	 * @return the new Term object
 	 */
 	private Term parseTerm(String termString) {
-		if (termString.contains("^")) {
-			String[] parts = termString.split("\\^");
-			return new Term(Integer.valueOf(parts[1]), Integer.valueOf(parts[0]));
-		}
-		return new Term(Integer.valueOf(termString));
+		return new Term(termString) ;
 	}
 	//Code Consolidation Functions
 	/**

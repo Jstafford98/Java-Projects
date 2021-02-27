@@ -1,0 +1,84 @@
+/**
+ * This program is used to create and manipulate Polynomials
+ * @author Jordan Stafford
+ */
+
+import java.util.Scanner;
+
+public class PolynomialDriver {
+
+	//Static Variables
+	private static Polynomial poly1 = new Polynomial(),poly2 = new Polynomial();
+	private static Scanner keyboard = new Scanner(System.in);
+
+	/**
+	 * Main program function
+	 * @param args - unused
+	 */
+	public static void main(String[] args) {
+		
+		boolean confirmed = false ;
+		
+		//Action selection menu
+		for (int i = 0 ; i < 2 ; i++) {
+			int current = i+1 ;
+			System.out.println("Now building polynomial " + current) ;
+			while (!confirmed) {
+	
+				System.out.print("     Please Choose a menu option:\n"   + 
+								 "        (1) Add Term\n"                + 		 
+						         "        (2) Remove Term\n"             + 
+								 "        (3) Display Polynomial\n"      + 
+						         "        (4) Confrim Polynomial\n"      + 
+								 "        (5) Quit Program\n"            );
+				switch (keyboard.next()) {
+				case "1":
+					addToPolynomial(i);
+					break;
+				case "2":
+					removeFromPolynomial(i);
+					break;
+				case "3":
+					System.out.println(i == 0 ? poly1.toString() : poly2.toString());
+					break;
+				case "4":
+					confirmed = true ;
+					break;
+				case "5":
+					keyboard.close();
+					System.exit(0);
+					break;
+				default:
+					System.out.println("No valid input");
+				}
+			} 
+		}
+		System.out.println("Polynomial One: " + poly1.toString() + "\nPolynomial Two: " + poly2.toString());
+		poly1.add(poly2) ;
+		System.out.println("Combined: " + poly1.toString());
+	}// End main
+	/**
+	 * Add a new Term to a polynomial based on a Term String
+	 */
+	public static void addToPolynomial(int i) {
+		System.out.println("Enter only one term (sign,coefficent, and exponent if any) to add to " + (i == 0 ? poly1.toString() : poly2.toString()) + ":");
+		String input = keyboard.next();
+		if (i == 0) {
+			poly1.addTerm(input) ;
+		} else {
+			poly2.addTerm(input) ;
+		}
+	}
+	/**
+	 * Remove a Term from the Polynomial using a Term String
+	 */
+	public static void removeFromPolynomial(int i) {
+		System.out.println("Enter only one term (sign,coefficent, and exponent if any) to remove from " + (i == 0 ? poly1.toString() : poly2.toString()) + ":");
+		String input = keyboard.next();
+		if (i == 0) {
+			poly1.removeTerm(input) ;
+		} else {
+			poly2.removeTerm(input) ;
+		}
+	}
+}

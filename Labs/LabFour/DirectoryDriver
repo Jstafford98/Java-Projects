@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class DirectoryDriver {
+
+	
+	
+	public static void main(String[] args) {
+		
+		Directory driver = new Directory() ;
+		String name, number ;
+		Scanner keyboard = new Scanner(System.in) ;
+		keyboard.useDelimiter("\n") ;
+	    
+	    while (true){
+	      System.out.println("Enter a name:") ;
+	      name = keyboard.next().trim() ;
+	
+	      if (name.toLowerCase().trim().equals("exit"))
+	          break ;
+	
+	      System.out.println("Enter a Number:") ;
+	      number = keyboard.next().trim().replaceAll("\\D","") ;
+	
+	      driver.addOrChangeEntry(name,number) ;
+	      
+	    }
+	
+	    driver.printDirectory() ;
+	}
+
+}

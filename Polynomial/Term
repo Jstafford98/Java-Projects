@@ -144,7 +144,6 @@ public class Term implements Comparable {
 	 * @param termString - the String the Term will be parsed from
 	 */
 	private void parseTerm(String termString) {
-		System.out.println("Parsing " + termString + " now" );
 		String[] parts = termString.split("\\^");
 		if (parts[0].equals("+x") || parts[0].contentEquals("-x")) {
 			mCoefficent = parts[0].contains("-") ? -1 : 1 ;

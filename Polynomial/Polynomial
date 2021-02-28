@@ -70,33 +70,27 @@ public class Polynomial {
 	 * @param term - the term to add to our list
 	 */
 	public void addTerm(Term term) {
-		if (!mTerms.contains(term)) {
-			int index = lookupTerm(term.getExponent()) ;
-			if (index > -1) {
-				mTerms.get(index).setCoefficient(mTerms.get(index).getCoefficient() + term.getCoefficient());
-				if (mTerms.get(index).getCoefficient() == 0)
-					mTerms.remove(index) ;
-				return ;
-			}
-			term.setHasX(true) ;
-			mTerms.add(term);
-			sort() ;
-		} else {
-			int index = mTerms.indexOf(term) ;
+		int index = lookupTerm(term.getExponent()) ;//Get index of term with matching exponent
+		if (index > -1) {//We have a Term with a matching exponent, so increment that Term's coefficent
 			mTerms.get(index).setCoefficient(mTerms.get(index).getCoefficient() + term.getCoefficient());
 			if (mTerms.get(index).getCoefficient() == 0)
 				mTerms.remove(index) ;
+			mTerms.get(index).setHasX(true) ;
 			return ;
+		} else {
+			//Otherwise this Term is unique
+			term.setHasX(true) ;
+			mTerms.add(term);
+			sort() ;
 		}
+		
 	}
 	/**
 	 * Add a term to our term list
 	 * @param term - the string to parse into our list
 	 */
 	public void addTerm(String term) {
-		Term tmp = new Term(term) ;
-		addTerm(tmp) ;
-		
+		addTerm(new Term(term)) ;
 	}
 	/**
 	 * Remove a term from our list based on the term's properties
@@ -116,16 +110,7 @@ public class Polynomial {
 	public void add(Polynomial p) {
 		LinkedList<Term> tempTermList = p.getTerms();
 		for (int i = 0 ; i < tempTermList.size() ; i++) {
-			if (!mTerms.contains(tempTermList.get(i))) {
-				int index = lookupTerm(tempTermList.get(i).getExponent()) ;
-				if (index > -1) {
-					mTerms.get(index).setCoefficient(mTerms.get(index).getCoefficient() + tempTermList.get(i).getCoefficient());
-					if (mTerms.get(index).getCoefficient() == 0)
-						mTerms.remove(index) ;
-					continue ;
-				}
-				mTerms.add(tempTermList.get(i)) ;
-			}
+			addTerm(tempTermList.get(i)) ;
 		}
 		sort() ;
 	}

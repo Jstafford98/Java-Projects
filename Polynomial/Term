@@ -7,7 +7,7 @@ import java.util.InputMismatchException;
 public class Term implements Comparable {
 	
 	// Data Members
-	private int mExponent, mCoefficent;
+	private int mExponent, mCoefficients;
 	private boolean hasX ;
 
 	// Constructors
@@ -18,12 +18,12 @@ public class Term implements Comparable {
 		this(1, 1);
 	}
 	/**
-	 * Create a new Term object from an existing Term
++	 * Create a new Term object from an existing Term
 	 * @param t - Term object used to create this term object
 	 */
 	public Term(Term t) {
 		mExponent = t.getExponent() ;
-		mCoefficent = t.getCoefficient() ;
+		mCoefficients = t.getCoefficient() ;
 	}
 	/**
 	 * Create a new Term object from a String
@@ -55,7 +55,7 @@ public class Term implements Comparable {
 	 */
 	public Term(int coefficent, int exponent, boolean hasX) {
 		mExponent = exponent ;
-		mCoefficent = coefficent ;
+		mCoefficients = coefficent ;
 		this.hasX = hasX ;
 	}
 	// Getters
@@ -71,7 +71,7 @@ public class Term implements Comparable {
 	 * @return this Term's coefficient value
 	 */
 	public int getCoefficient() {
-		return mCoefficent;
+		return mCoefficients;
 	}
 	/**
 	 * Determine if this Term object should contain an X symbol
@@ -86,7 +86,7 @@ public class Term implements Comparable {
 	 * @param coefficent - new value of mCoefficient
 	 */
 	public void setCoefficient(int coefficent) {
-		mCoefficent = coefficent;
+		mCoefficients = coefficent;
 		hasX = coefficent == 1 || coefficent == -1 ;
 	}
 	/**
@@ -119,18 +119,18 @@ public class Term implements Comparable {
 			return true;
 		else if (o instanceof Term) {
 			Term other = (Term) o;
-			return mExponent == other.getExponent() && mCoefficent == other.getCoefficient();
+			return mExponent == other.getExponent() && mCoefficients == other.getCoefficient();
 		}
 		return false;
 	}
 	@Override
 	public String toString() {
-		String sign = mCoefficent > 0 ? "+" : "", 
-			   returning_coefficent = mCoefficent == 1 || mCoefficent == -1 ? "" : String.valueOf(mCoefficent),
+		String sign = mCoefficients > 0 ? "+" : "", 
+			   returning_coefficent = mCoefficients == 1 || mCoefficients == -1 ? "" : String.valueOf(mCoefficients),
 			   end = hasX ? "x" : "";
-		if (mCoefficent == 0) 
+		if (mCoefficients == 0) 
 			return "" ;
-		if (mCoefficent == -1)
+		if (mCoefficients == -1)
 			sign = "-" ;
 		return mExponent == 1 || mExponent == 0 ? sign + returning_coefficent + end : sign + returning_coefficent + end + "^" + String.valueOf(mExponent);
 	}
@@ -146,19 +146,19 @@ public class Term implements Comparable {
 	private void parseTerm(String termString) {
 		String[] parts = termString.split("\\^");
 		if (parts[0].equals("+x") || parts[0].contentEquals("-x")) {
-			mCoefficent = parts[0].contains("-") ? -1 : 1 ;
+			mCoefficients = parts[0].contains("-") ? -1 : 1 ;
 			mExponent = parts.length == 2 ? Integer.parseInt(parts[1]) : 1 ;
 			hasX = false ;
 		} else if (termString.contains("^")) {  
 			String sign = parts[0].contains("-") ? "-" : "" ;
 			hasX = parts[0].contains("x") ;
-			mCoefficent = Integer.parseInt(sign + (parts[0].replaceAll("\\D+", ""))) ;
+			mCoefficients = Integer.parseInt(sign + (parts[0].replaceAll("\\D+", ""))) ;
 			mExponent = Integer.parseInt(parts[1]) ;
 			
 		} else {
 			String sign = parts[0].contains("-") ? "-" : "" ;
 			hasX = termString.contains("x") ;
-			mCoefficent = Integer.parseInt(sign + termString.replaceAll("\\D+", "")) ;
+			mCoefficients = Integer.parseInt(sign + termString.replaceAll("\\D+", "")) ;
 			mExponent = hasX ? 1 : 0 ;
 			
 		}
@@ -179,7 +179,7 @@ public class Term implements Comparable {
 	 * @param coefficent - mCoefficient's future value
 	 */
 	public void incrementCoefficent(int coefficent) {
-		mCoefficent += coefficent ;
+		mCoefficients += coefficent ;
 		
 	}
 }

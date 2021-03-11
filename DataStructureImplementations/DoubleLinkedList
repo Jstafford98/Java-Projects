@@ -1,0 +1,263 @@
+import java.util.Collection;
+import java.util.List;
+import java.util.ListIterator;
+
+public class DoubleLinkedList<E>   {
+	
+	Iterator<E> it = new Iterator<>() ;
+	
+	private Node mHead = null ;
+	private E mData ;
+	
+	
+	public DoubleLinkedList() {
+		mHead = null ;
+	}
+	
+	//======================================================================
+	//				DOUBLE LINKED LIST FUNCTIONS
+	//======================================================================
+	
+	/**
+	 * Returns an iterator over the elements in this list in proper sequence.
+	 */
+	public Iterator<E> iterator() {
+		return null;
+	}
+	/**
+	 * Returns a list iterator over the elements in this list (in proper sequence).
+	 */
+	public ListIterator<E> listIterator() {
+
+		return null;
+	}
+	/**
+	 * Returns a list iterator over the elements in this list (in proper sequence), starting at the specified position in the list.
+	 */
+	public ListIterator<E> listIterator(int index) {
+		return null;
+	}
+	/**
+	 * Appends the specified element to the end of this list (optional operation).
+	 */
+	public boolean add(Object e) {
+		return false;
+	}
+	/**
+	 * Inserts the specified element at the specified position in this list (optional operation).
+	 * @param index
+	 * @param element
+	 */
+	public void add(int index, E element) {
+		
+	}
+	/**
+	 * Removes all of the elements from this list (optional operation).
+	 */
+	public void clear() {
+		
+	}
+	/**
+	 * Compares the specified object with this list for equality.
+	 */
+	@Override
+	public boolean equals(Object e) {
+		return false ;
+	}
+	/**
+	 * Returns true if this list contains the specified element.
+	 */
+	public boolean contains(Object o) {
+		return false;
+	}
+	/**
+	 * Returns the element at the specified position in this list.
+	 */
+	public Object get(int index) {
+		return null;
+	}
+	/**
+	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
+	 */
+	public int indexOf(Object o) {
+		return 0;
+	}
+	/**
+	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element.
+	 */
+	public int lastIndexOf(Object o) {
+		return 0;
+	}
+	/**
+	 * 	Returns true if this list contains no elements.
+	 */
+	public boolean isEmpty() {
+		return false;
+	}
+	/**
+	 * Removes the element at the specified position in this list (optional operation).
+	 */
+	public Object remove(int index) {
+		return null;
+	}
+	/**
+	 * Removes the first occurrence of the specified element from this list, if it is present (optional operation).
+	 */
+	public boolean remove(Object o) {
+		return false;
+	}
+	/**
+	 * 	Replaces the element at the specified position in this list with the specified element (optional operation).
+	 * @param index
+	 * @param element
+	 * @return
+	 */
+	public Object set(int index, E element) {
+		return null;
+	}
+	/**
+	 * Returns the number of elements in this list.
+	 */
+	public int size() {
+		return 0;
+	}	
+	/**
+	 * Returns a formatted output of the LinkedList
+	 */
+	@Override
+	public String toString() {
+		return "" ;
+	}
+	
+	//======================================================================
+	//						NESTED CLASSES
+	//======================================================================
+	class Node {
+		private Node mPrev,mNext ;
+		private E mData ;
+		
+		//Constructor
+		public Node(E data) {
+			this(data,null) ;
+		}
+		private Node(E data, Node next) {
+			mData = data ;
+			mNext = next ;
+		}	
+	}//End Node Class
+	private class Iterator<E> implements ListIterator{	
+			
+		Node mPrev,mNext ;
+		int mCursor, mLastIndex ;
+		boolean goingForward ;
+		
+		public Iterator() {
+			mPrev = null ;
+			mNext = null ;
+			mCursor = 0 ;
+			goingForward = true ;
+		}
+		/**
+		 * Returns true if this list iterator has more elements when traversing the list in the forward direction.
+		 * @Override
+		 */
+		public boolean hasNext() {
+			return mNext != null;
+		}
+
+		/**
+		 * Returns the next element in the list and advances the cursor position.
+		 * @Override
+		 */
+		public E next() {
+			mLastIndex = mCursor++ ;
+			mPrev = mPrev.mNext ;
+			mNext = mNext.mNext ;
+			return null ;
+		}
+
+		
+		/**
+		 * Returns true if this list iterator has more elements when traversing the list in the reverse direction.
+		 * @Override
+		 */
+		public boolean hasPrevious() {
+			return mPrev != null ;
+		}
+
+		
+		/**
+		 * Returns the previous element in the list and moves the cursor position backwards.
+		 * @Override
+		 */
+		public E previous() {
+			goingForward = false ;
+			mNext = mNext.mPrev ;
+			mPrev = mPrev.mPrev ;
+			return null;
+		}
+
+		
+		/**
+		 * Returns the index of the element that would be returned by a subsequent call to next().
+		 * @Override
+		 */
+		public int nextIndex() {
+			return mCursor + 1 ;
+		}
+
+		
+		/**
+		 * Returns the index of the element that would be returned by a subsequent call to previous().
+		 * @Override
+		 */
+		public int previousIndex() {
+			return mCursor -1 ;
+		}
+
+		
+		/**
+		 * Removes from the list the last element that was returned by next() or previous() (optional operation).
+		 * @Override
+		 */
+		public void remove() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		
+		/**
+		 * 	Replaces the last element returned by next() or previous() with the specified element (optional operation).
+		 * @Override
+		 */
+		public void set(Object e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		
+		/**
+		 * Inserts the specified element into the list (optional operation).
+		 * @Override
+		 */
+		public void add(Object e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			
+		}//End Iterator Class
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+}

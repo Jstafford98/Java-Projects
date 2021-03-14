@@ -12,14 +12,22 @@ public class DoubleLinkedList<E> extends AbstractSequentialList<E>
 	  if (index < 0 || index > size())
           throw new IndexOutOfBoundsException("Index must be between 0 and " + size());
           
-	  ListIterator<E> iter = listIterator(index) ;
-	  iter.add(obj) ;
-      size++ ;
+      Node current = head;
+
+      for (int i = 0; i < index - 1; i++)
+          current = current.next; // This will be the node right before the insertion idx
+      
+      if (index == 0) 
+          head = new Node(obj,head,null);
+      else
+      	current.next = new Node(obj,current.next, current) ;
+
    }
   public void addFirst(E obj) {
 	  add(0,obj) ;
   }
   public void addLast(E obj) { 
+	  
 	  add(size-1,obj) ;
   }
 
@@ -51,15 +59,26 @@ public class DoubleLinkedList<E> extends AbstractSequentialList<E>
   }
 
   public E remove(int index)
-  {     E returnValue = null;
-        ListIterator<E> iter = listIterator(index);
-        if (iter.hasNext()){
-        	returnValue = iter.next();
-            iter.remove();
-        } else {   
-        	throw new IndexOutOfBoundsException();  
-        }
-        return returnValue;
+  {     
+		if (index < 0 || index >= size())
+	        throw new IndexOutOfBoundsException("Index must be between 0 and " + size());
+	
+	    Node current = head;
+	    
+	    for (int i = 0; i < index - 1; i++)
+	        current = current.next;
+	
+	    Node temp = current.next;
+	
+	    if (index == 0) {
+	    	head = head.next ;
+	    	head.prev = null ;
+	    } else {       
+	    	current.next = current.next.next ;
+	    	if (current.next != null)
+	    		current.next.prev = current ;
+	    }
+	    return (E) temp.data;
   }
 
   public Iterator iterator() {
@@ -99,8 +118,8 @@ public class DoubleLinkedList<E> extends AbstractSequentialList<E>
 //======================================================================
   public class ListIter implements ListIterator<E> 
   {
-        private Node<E> nextItem;      // the current node
-        private Node<E> lastItemReturned;   // the previous node
+        private Node<E> nextItem = null ;      // the current node
+        private Node<E> lastItemReturned = null ;   // the previous node
         private int index = 0;   // 
 
     public ListIter(int i) {  // constructor for ListIter class
@@ -138,21 +157,22 @@ public class DoubleLinkedList<E> extends AbstractSequentialList<E>
     	nextItem.data = (E) o ;
     }
     public void remove(){
-    	
+    	DoubleLinkedList.this.remove(index) ;
     }
     public E next(){  
     	lastItemReturned = nextItem ;
     	nextItem = nextItem.next ;
+    	index++ ;
         return lastItemReturned.data; 
     }
     public E previous(){ 	
     	lastItemReturned = nextItem ;
     	nextItem = nextItem.prev ;
+    	index-- ;
     	return lastItemReturned.data; 
     }
     public void add(E obj) {
-    	tail.next = new Node(obj,null,tail) ;
-    	tail = tail.next ;
+    	DoubleLinkedList.this.add(obj) ;
     }
   }// end of inner class ListIter
 }// end of class DoubleLinkedList

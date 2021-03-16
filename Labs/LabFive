@@ -1,0 +1,35 @@
+public class LabFive {
+	
+	public static void main(String[] args) {
+		
+        Node tom = new Node<String>("Tom");
+        Node dick = new Node<String>("Dick");
+        Node harry = new Node<String>("Harry");
+        Node sam = new Node<String>("Sam");
+        
+        tom.next = dick;
+        
+        dick.prev = tom ;
+        dick.next = harry;
+        
+        harry.prev = dick ;
+        harry.next = sam;
+        
+        sam.prev = harry ;
+        
+        Node<String> head = tom;
+        Node<String> tail = sam;
+        
+        System.out.println("---------BEFORE--------");
+        System.out.println(tail.data);
+        System.out.println(tail.prev.data);
+        System.out.println(tail.prev.prev.data);
+        
+        System.out.println("---------AFTER---------");
+        System.out.println(head.data);
+        System.out.println(head.next.data);
+        System.out.println(head.next.next.data);
+
+	}
+
+}

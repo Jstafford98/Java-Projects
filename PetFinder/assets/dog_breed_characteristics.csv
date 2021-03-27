@@ -1,0 +1,148 @@
+BreedName,Group,MaleWtKg,Temperment,Intelligence,Watchdog,PopularityUS2017
+Border Collie,Herding,17,"Intelligent, Energetic, Alert, Responsive, Tenacious, Loyal, Protective",1,6,38
+Poodle,Non Sporting,26,"Active, Alert, Faithful, Instinctual, Intelligent, Trainable",2,4,7
+Standard Poodle,Non Sporting,26,"Active, Alert, Faithful, Instinctual, Intelligent, Trainable",2,4,7
+German Shepherd Dog,Herding,35,"Alert, Confident, Courageous, Curious, Intelligent, Loyal, Obedient, Watchful",3,6,2
+Shepherd,Herding,35,"Alert, Confident, Courageous, Curious, Intelligent, Loyal, Obedient, Watchful",3,6,2
+White German Shepherd,Herding,35,"Alert, Confident, Courageous, Curious, Intelligent, Loyal, Obedient, Watchful",3,6,2
+Golden Retriever,Sporting,32,"Confident, Friendly, Intelligent, Kind, Reliable, Trustworthy",4,3,3
+Retriever,Sporting,32,"Confident, Friendly, Intelligent, Kind, Reliable, Trustworthy",4,3,3
+Doberman Pinscher,Working,43,"Alert, Energetic, Fearless, Intelligent, Loyal, Obedient",5,6,16
+Shetland Sheepdog Sheltie,Herding,9,"Affectionate, Friendly, Gentle, Intelligent, Lively, Playful, Responsive",6,4,24
+Black Labrador Retriever,Sporting,32,"Affectionate, Alert, Cheerful, Energetic, Friendly, Gentle, Intelligent, Loving, Loyal, Outgoing, Playful, Responsive, Social",7,3,1
+Chocolate Labrador Retriever,Sporting,32,"Affectionate, Alert, Cheerful, Energetic, Friendly, Gentle, Intelligent, Loving, Loyal, Outgoing, Playful, Responsive, Social",7,3,1
+Labrador Retriever,Sporting,32,"Affectionate, Alert, Cheerful, Energetic, Friendly, Gentle, Intelligent, Loving, Loyal, Outgoing, Playful, Responsive, Social",7,3,1
+Yellow Labrador Retriever,Sporting,32,"Affectionate, Alert, Cheerful, Energetic, Friendly, Gentle, Intelligent, Loving, Loyal, Outgoing, Playful, Responsive, Social",7,3,1
+Papillon,Toy,5,"Alert, Energetic, Friendly, Happy, Hardy, Intelligent",8,3,53
+Rottweiler,Working,51,"Alert, Courageous, Fearless, Good-natured, Independent, Intelligent, Loyal, Protective",9,6,8
+Australian Cattle Dog/Blue Heeler,Herding,21,"Aggressive, Alert, Energetic, Intelligent, Loyal, Protective, Responsive",10,6,56
+Cattle Dog,Herding,21,"Aggressive, Alert, Energetic, Intelligent, Loyal, Protective, Responsive",10,6,56
+English Springer Spaniel,Sporting,23,"Affectionate, Alert, Cheerful, Energetic, Intelligent, Playful, Social",13,3,27
+Belgian Shepherd Tervuren,Herding,34,"Alert, Attentive, Energetic, Intelligent, Loyal, Protective",14,6,103
+Schipperke,Non Sporting,7,"Agile, Confident, Curious, Faithful, Fearless, Independent, Intelligent",15,3,110
+Belgian Shepherd Dog Sheepdog,Herding,32,"Active, Alert, Confident, Friendly, Hard-working, Protective, Stubborn, Watchful, Intelligent",15,6,120
+Collie,Herding,31,"Friendly, Gentle, Intelligent, Loyal, Protective, Responsive, Social",16,5,40
+Keeshond,Non Sporting,18,"Agile, Bright, Obedient, Playful, Quick, Sturdy, Intelligent",16,4,87
+German Shorthaired Pointer,Working,29,"Affectionate, Boisterous, Bold, Cooperative, Intelligent, Trainable",17,3,10
+English Cocker Spaniel,Sporting,14,"Affectionate, Faithful, Friendly, Intelligent, Playful, Quiet, Trainable",18,4,52
+Schnauzer,Working,17,"Devoted, Good-natured, Intelligent, Lively, Playful, Trainable",18,4,90
+Flat-coated Retriever,Sporting,30,"Friendly, Confident, Devoted, Optimistic, Outgoing, Intelligent",18,5,96
+Brittany Spaniel,Sporting,17,"Alert, Independent, Intelligent, Responsive, Social",19,3,26
+Cocker Spaniel,Sporting,10,"Even Tempered, Joyful, Merry, Outgoing, Intelligent, Sociable, Trusting",20,3,29
+Spaniel,Sporting,10,"Even Tempered, Joyful, Merry, Outgoing, Intelligent, Sociable, Trusting",20,3,29
+Weimaraner,Sporting,29,"Alert, Aloof, Energetic, Fast, Intelligent, Powerful, Steady, Stubborn, Social",21,3,34
+Bernese Mountain Dog,Working,44,"Affectionate, Faithful, Intelligent, Loyal",22,5,25
+Mountain Dog,Working,44,"Affectionate, Faithful, Intelligent, Loyal",22,5,25
+Pomeranian,Toy,2,"Active, Extroverted, Friendly, Intelligent, Lively, Playful, Sociable",23,3,22
+Irish Water Spaniel,Sporting,25,"Active, Alert, Clownish, Inquisitive, Intelligent, Quick",24,4,164
+Corgi,Herding,13,"Active, Affectionate, Alert, Companionable, Devoted, Gentle, Intelligent",26,4,68
+Welsh Corgi,Herding,13,"Active, Affectionate, Alert, Companionable, Devoted, Gentle, Intelligent",26,4,68
+Cardigan,Herding,16,"Active, Affectionate, Alert, Companionable, Devoted, Gentle, Intelligent",26,4,68
+Pembroke,Herding,12,"Active, Affectionate, Alert, Companionable, Devoted, Gentle, Intelligent",26,4,68
+Yorkshire Terrier Yorkie,Toy,3,"Alert, Courageous, Energetic, Independent, Intelligent, Loyal, Playful",27,3,9
+Chesapeake Bay Retriever,Sporting,33,"Happy, Affectionate, Dominant, Intelligent, Protective, Quiet",27,3,43
+Puli,Herding,14,"Agile, Energetic, Faithful, Intelligent, Loyal, Obedient",27,5,142
+Giant Schnauzer,Working,38,"Dominant, Intelligent, Kind, Loyal, Powerful, Strong-willed",28,6,80
+Airedale Terrier,Terrier,26,"Alert, Confident, Courageous, Friendly, Intelligent, Outgoing",29,4,55
+Bouvier des Flanders,Herding,42,"Familial, Gentle, Intelligent, Loyal, Protective, Rational",29,5,85
+Border Terrier,Terrier,7,"Affectionate, Alert, Even-tempered, Fearless, Intelligent, Obedient",30,4,92
+Briard,Herding,35,"Faithful, Fearless, Intelligent, Loyal, Obedient, Protective",30,6,127
+Welsh Springer Spaniel,Sporting,18,"Affectionate, Loyal, Active, Friendly, Playful, Stubborn, Intelligent",31,4,133
+Manchester Terrier,Terrier,6,"Active, Alert, Devoted, Discerning, Quiet, Loyal, Intelligent",32,3,135
+Samoyed,Working,26,"Alert, Lively, Friendly, Intelligent, Playful, Sociable, Stubborn",33,4,57
+Newfoundland Dog,Working,65,"Cheerful, Courageous, Intelligent, Loyal, Social, Sweet, Gentle",34,5,36
+American Staffordshire Terrier,Terrier,28,"Attentive, Courageous, Devoted, Friendly, Loyal, Tenacious, Intelligent",34,3,83
+Gordon Setter,Sporting,31,"Alert, Confident, Eager, Fearless, Loyal, Intelligent",34,4,104
+Bearded Collie,Herding,23,"Active, Alert, Hardy, Intelligent, Lively, Self-confident",34,4,125
+Australian Terrier,Terrier,5,"Alert, Compassionate, Courageous, Even Tempered, Loyal, Spirited, Intelligent",34,3,137
+Field Spaniel,Sporting,19,"Adaptable, Cautious, Docile, Familial, Sensitive, Sociable",34,3,145
+Cairn Terrier,Terrier,7,"Active, Assertive, Courageous, Fearless, Hardy, Intelligent",35,4,69
+Irish Setter,Sporting,32,"Affectionate, Companionable, Energetic, Independent, Lively, Playful, Intelligent",35,3,72
+Kerry Blue Terrier,Terrier,17,"Affectionate, Alert, Gentle, Loyal, Spirited, Strong-willed, Intelligent",35,5,129
+Norwegian Elkhound,Hound,26,"Alert, Bold, Hardy, Loyal, Playful, Strong-willed, Intelligent",36,6,91
+Miniature Pinscher,Toy,5,"Clever, Energetic, Friendly, Outgoing, Playful, Responsive, Intelligent",37,3,71
+English Setter,Sporting,30,"Strong-willed, Mischevious, Gentle, Energetic, Intelligent",37,3,95
+Setter,Sporting,30,"Strong-willed, Mischevious, Gentle, Energetic, Intelligent",37,3,95
+Silky Terrier,Toy,5,"Alert, Friendly, Inquisitive, Joyful, Quick, Responsive, Intelligent",37,3,106
+Clumber Spaniel,Sporting,32,"Gentle, Loyal, Affectionate, Dignified, Aloof",37,3,140
+Affenpinscher,Toy,4,"Active, Adventurous, Curious, Fun-loving, Playful, Stubborn",37,1,147
+Pharaoh Hound,Hound,23,"Active, Affectionate, Intelligent, Playful, Sociable, Trainable",37,2,174
+Norwich Terrier,Terrier,5,"Affectionate, Energetic, Hardy, Intelligent, Sensitive",38,3,105
+Dalmatian,Non Sporting,25,"Active, Energetic, Friendly, Intelligent, Outgoing, Playful, Sensitive",39,3,63
+Wheaten Terrier,Terrier,18,"Affectionate, Energetic, Faithful, Intelligent, Playful, Spirited",40,4,49
+Fox Terrier,Terrier,8,"Active, Affectionate, Alert, Fearless, Intelligent, Playful",40,3,122
+Smooth Fox Terrier,Terrier,8,"Active, Affectionate, Alert, Fearless, Intelligent, Playful",40,3,122
+Bedlington Terrier,Terrier,9,"Affectionate, Devoted, Energetic, Loyal, Playful, Reliable, Intelligent",40,3,151
+Irish Wolfhound,Hound,55,"Dignified, Generous, Loyal, Patient, Sweet-tempered, Thoughtful, Intelligent",41,3,73
+Curly-Coated Retriever,Sporting,34,"Clever, Independent, Intelligent, Lively, Sensitive, Trainable",41,3,171
+Australian Shepherd,Terrier,27,"Active, Affectionate, Friendly, Good-natured, Intelligent, Protective, Loving",42,5,17
+Kuvasz,Working,49,"Clownish, Independent, Intelligent, Loyal, Patient, Protective",42,6,157
+English Pointer,Sporting,25,"Active, Affectionate, Amiable, Even-tempered, Kind, Loyal, Intelligent",43,4,113
+Pointer,Sporting,25,"Active, Affectionate, Amiable, Even-tempered, Kind, Loyal, Intelligent",43,4,113
+Saluki,Hound,21,"Aloof, Intelligent, Quiet, Reserverd, Loyal",43,3,123
+Finnish Spitz,Non Sporting,15,"Happy, Independent, Intelligent, Loyal, Playful, Vocal",43,3,177
+Cavalier King Charles Spaniel,Toy,7,"Affectionate, Cheerful, Courageous, Gentle, Intelligent, Social",44,2,19
+German Wirehaired Pointer,Sporting,30,"Active, Affectionate, Friendly, Intelligent, Loyal, Willful, Responsive",44,6,62
+Black and Tan Coonhound,Hound,55,"Adaptable, Easygoing, Even-tempered, Gentle, Lovable, Trusting, Intelligent",44,3,130
+Coonhound,Hound,55,"Adaptable, Easygoing, Even-tempered, Gentle, Lovable, Trusting, Intelligent",44,3,130
+American Water Spaniel,Sporting,16,"Energetic, Friendly, Intelligent, Obedient, Protective, Trainable",44,4,167
+Husky,Working,24,"Alert, Friendly, Gentle, Intelligent, Outgoing",45,1,12
+Siberian Husky,Working,24,"Alert, Friendly, Gentle, Intelligent, Outgoing",45,1,12
+Bichon Frise,Non Sporting,4,"Affectionate, Cheerful, Feisty, Gentle, Playful, Intelligent, Sensitive",45,3,46
+Wire-haired Pointing Griffon,Sporting,25,"Gentle, Loyal, Proud, Trainable, Vigilant, Intelligent",46,5,65
+Tibetan Spaniel,Non Sporting,6,"Intelligent, Assertive, Aloof, Happy, Independent, Willful",46,4,121
+Greyhound,Hound,33,"Intelligent, Gentle, Affectionate, Athletic, Even-tempered, Quiet",46,3,156
+Otterhound,Hound,41,"Amiable, Boisterous, Even-tempered",46,2,186
+Foxhound,Hound,32,"Independent, Intelligent, Kind, Loving, Loyal, Sweet-tempered",46,2,187
+Hound,Hound,32,"Independent, Intelligent, Kind, Loving, Loyal, Sweet-tempered",46,2,187
+Terrier,Terrier,8,"Affectionate, Alert, Courageous, Intelligent, Friendly, Hardy, Independent",47,3,42
+West Highland White Terrier Westie,Terrier,8,"Affectionate, Alert, Courageous, Intelligent, Friendly, Hardy, Independent",47,3,42
+Scottish Deerhound,Hound,42,"Dignified, Docile, Friendly, Gentle, Polite, Quiet",47,1,168
+Great Dane,Working,77,"Friendly, Confident, Devoted, Intelligent, Gentle, Loving, Reserved",48,5,14
+Boxer,Working,30,"Brave, Bright, Confident, Energetic, Fearless, Friendly, Intelligent, Loyal, Playful",49,5,11
+Dachshund,Hound,7,"Clever, Courageous, Devoted, Lively, Playful, Stubborn",49,3,13
+Staffordshire Bull Terrier,Terrier,14,"Affectionate, Bold, Courageous, Fearless, Intelligent, Reliable",49,3,82
+Alaskan Malamute,Working,40,"Affectionate, Devoted, Dignified, Friendly, Loyal, Playful",50,5,59
+Whippet,Hound,16,"Affectionate, Friendly, Gentle, Intelligent, Lively, Quiet",51,3,61
+Shar Pei,Non Sporting,22,"Affectionate, Devoted, Independent, Loving, Reserved, Suspicious",51,3,64
+Wire Fox Terrier,Terrier,7,"Alert, Bold, Fearless, Friendly, Keen, Quick, Intelligent",51,3,99
+Wirehaired Terrier,Terrier,7,"Alert, Bold, Fearless, Friendly, Keen, Quick, Intelligent",51,3,99
+Rhodesian Ridgeback,Hound,39,"Dignified, Intelligent, Loyal, Mischevious, Sensitive, Strong-willed",52,3,41
+Welsh Terrier,Terrier,9,"Alert, Friendly, Intelligent, Spirited, Independent, Loving",53,3,109
+Irish Terrier,Terrier,12,"Dominant, Intelligent, Lively, Protective, Respectful, Trainable",53,5,114
+Ibizan Hound,Hound,22,"Active, Clownish, Engaging, Independent, Intelligent, Stubborn",53,3,165
+Boston Terrier,Non Sporting,9,"Affectionate, Aggressive, Friendly, Gentle, Intelligent, Lively, Playful",54,3,21
+Akita,Working,44,"Alert, Courageous, Dignified, Docile, Friendly, Intelligent, Responsive",54,5,47
+Skye Terrier,Terrier,17,"Loyal, Fearless, Friendly, Good-tempered, Intelligent",55,4,172
+Norfolk Terrier,Terrier,5,"Companionable, Fearless, Happy, Lovable, Self-confident, Spirited, Intelligent",56,3,128
+Sealyham Terrier,Terrier,9,"Alert, Calm, Even-tempered, Fearless, Friendly, Intelligent",56,3,150
+Pug,Toy,8,"Affectionate, Cheerful, Courageous, Gentle, Intelligent, Friendly, Outgoing, Playful, Loyal",57,3,31
+French Bulldog,Non Sporting,12,"Affectionate, Playful, Alert, Athletic, Bright, Easygoing, Keen, Lively, Patient",58,3,4
+Maltese,Toy,4,"Active, Docile, Easygoing, Gentle, Intelligent, Playful, Responsive, Sweet-tempered",59,3,33
+Italian Greyhound,Toy,4,"Affectionate, Agile, Athletic, Companionable, Intelligent, Mischevious",60,3,74
+Chinese Crested Dog,Toy,4,"Affectionate, Alert, Happy, Lively, Playful, Sweet-tempered",61,2,79
+Tibetan Terrier,Non Sporting,10,"Affectionate, Amiable, Energetic, Gentle, Reserved, Sensitive, Intelligent",62,3,101
+Japanese Chin,Toy,5,"Alert, Cat-like, Independent, Intelligent, Loving, Loyal, Playful",62,3,108
+Lakeland Terrier,Terrier,8,"Independent, Bold, Confident, Friendly, Intelligent, Trainable",62,3,138
+Petit Basset Griffon Vendeen,Hound,16,"Active, Extroverted, Friendly, Happy, Independent, Lively, Intelligent",62,3,160
+Dandi Dinmont Terrier,Terrier,10,"Affectionate, Companionable, Determined, Fun-loving, Independent, Lively, Intelligent",62,3,182
+Old English Sheepdog,Herding,39,"Adaptable, Bubbly, Intelligent, Loving, Playful, Sociable, Protective",63,4,70
+Sheep Dog,Herding,39,"Adaptable, Bubbly, Intelligent, Loving, Playful, Sociable, Protective",63,4,70
+Great Pyrenees,Working,45,"Affectionate, Confident, Fearless, Gentle, Patient, Strong-willed",64,6,66
+Saint Bernard,Working,66,"Friendly, Gentle, Independent, Intelligent, Outgoing, Quiet, Social",65,3,48
+Scottish Terrier Scottie,Terrier,9,"Independent, Fiesty, Alert, Playful, Quick, Self-assured",65,3,58
+Bull Terrier,Terrier,28,"Active, Keen, Protective, Sweet-tempered, Trainable",66,6,60
+Chihuahua,Toy,2,"Alert, Courageous, Devoted, Lively, Intelligent, Quick",67,2,32
+Lhasa Apso,Non Sporting,6,"Alert, Assertive, Devoted, Friendly, Intelligent, Lively, Obedient, Playful, Spirited, Steady",68,3,77
+Bullmastiff,Working,55,"Alert, Calm, Courageous, Devoted, Docile, Powerful, Loyal, Protective, Reliable",69,6,51
+Shih Tzu,Toy,6,"Active, Courageous, Friendly, Gentle, Happy, Intelligent, Lively, Outgoing, Playful",70,3,20
+Basset Hound,Hound,26,"Affectionate, Devoted, Friendly, Gentle, Sweet-tempered, Tenacious",71,1,39
+Beagle,Hound,11,"Friendly, Gentle, Independent, Intelligent, Lively, Loving, Sweet",72,1,6
+Mastiff,Working,90,"Affectionate, Alert, Cheerful, Courageous, Intelligent, Loyal, Protective",72,6,28
+Pekingese,Toy,4,"Affectionate, Aggressive, Good-natured, Intelligent, Opinionated, Stubborn",73,3,88
+Bloodhound,Hound,46,"Affectionate, Even-tempered, Gentle, Stubborn, Independent",74,1,50
+Borzoi,Hound,41,"Athletic, Gentle, Independent, Intelligent, Quiet, Respectful",75,1,102
+Chow Chow,Non Sporting,26,"Aloof, Independent, Loyal, Quiet, Intelligent, Protective, Detached",76,3,76
+English Bulldog,Non Sporting,25,"Aggressive, Courageous, Friendly, Loving, Social, Sweet",77,3,5
+Basenji,Hound,11,"Affectionate, Alert, Curious, Energetic, Playful, Intelligent",78,5,84
+Afghan Hound,Sporting,28,"Aloof, Clownish, Dignified, Happy, Independent",79,1,93

@@ -1,99 +1,322 @@
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
-public class DoubleLinkedList<E> extends AbstractSequentialList<E>
-{  // Data fields
-    	private Node<E> head = null;   // points to the head of the list
-    	private Node<E> tail = null;   //points to the tail of the list
-    	private int size = 0;    // the number of items in the list
-  
-  public void add(int index, E obj)
-  { // Fill Here 
-   }
-  public void addFirst(E obj) { // Fill Here 
-	  
-  }
-  public void addLast(E obj) { // Fill Here
-  }
+/**
+ * @author Jordan Stafford
+ */
+public class DoubleLinkedList<E> implements List<E> {
+	
+	Node<E> head = null ,tail = null ;
+	int size = 0 ;
+	
+	/**
+	 * 
+	 */
+	DoubleLinkedList() {}
+	public Iterator iterator(){
+		return new MyIter() ;
+	}
+	public MyIter listIterator(){
+		return new MyIter() ;
+	}
+	public MyIter listIterator(int index){
+		return new MyIter(index) ;
+	}
+	public boolean add(E e) {
+		listIterator(size).add(e) ;
+		return true ;
+	}
+	public void add(int index, E e) {
+		listIterator(index).add(e) ;
+	}
+	public void clear() {
+		head = null ;
+		tail = null ;
+	}
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true ;
+		}  else if (o instanceof DoubleLinkedList<?>) {
+			DoubleLinkedList<E> other = (DoubleLinkedList<E>) o ;
+			MyIter thisList = new MyIter(), otherList = new MyIter() ;
+			while (thisList.hasNext() && otherList.hasNext()) {
+				if (thisList.next() != otherList.next()) {
+					return false ;
+				}
+			}
+		}
+		return true ;
+	}
+	public boolean contains(Object o) {
+		return indexOf(o) == -1 ? false : true ;
+	}
+	public E get(int index) {
+		return listIterator(index).next() ;
+	}
+	public int indexOf(Object o) {
+		MyIter itr = new MyIter() ;
+		E other = (E) o ;
+		int idx = 0, foundIdx = -1 ;
+		while (itr.hasNext()) {
+			 if (itr.next().equals(other)) {
+				 foundIdx = idx ;
+				 break ;
+			 }
+			 idx++ ;
+		}
+		return foundIdx ;
+	}
+	public int lastIndexOf(Object o) {
+		MyIter itr = new MyIter() ;
+		E other = (E) o ;
+		int foundIdx = -1, idx = 0 ;
+		while (itr.hasNext()) {
+			 if (itr.next().equals(other)) {
+				 foundIdx = idx ;
+				 idx++ ;
+				 continue ;
+			 }
+			 idx++ ;
+		}
+		return foundIdx  ;
+	}
+	public boolean isEmpty() {
+		return head == null ;
+	}
+	public E remove(int index) {
+		MyIter itr = new MyIter(index) ;
+		E tmp = (E) itr.next() ;
+		itr.remove() ;
+		return tmp ;
+	}
+	public boolean remove(Object o) {
+		int idx = indexOf(o) ;
+		if (idx != -1) {
+			remove(idx) ;
+			return true ;
+		}
+		return false ;
+	}
+	public E set(int index,E element) {
+		MyIter itr = new MyIter(index) ;
+		E tmp = (E) itr.next() ;
+		itr.set(element) ;
+		return tmp ;
+	}
+	public int size() {
+		return size ;
+	}
+	public String toString() {
+		StringBuilder output = new StringBuilder() ;
+		MyIter itr = new MyIter() ;
+		output.append("[") ;
+		while (itr.nextIndex() < size) {
+			output.append(itr.next()) ;
+			output.append(", ") ;
+		}
+		output.append("]") ;
+		return output.toString() ;
+	}
+	
+	
+	
+	static class Node<E> {
+		
+		Node<E> previous, next ;
+		E data ;
+		
+		/**
+		 * @param data
+		 */
+		Node(E data){
+			this.data = data ;
+			previous = null ;
+			next = null ;
+		}
+		/**
+		 * @param data
+		 * @param prev
+		 * @param nxt
+		 */
+		Node(E data, Node<E> prev, Node<E> nxt){
+			this.data = data ;
+			previous = prev ;
+			next = next ;
+		}
+	}
+	class MyIter implements ListIterator<E> {
+		
+		
+		private int cursor ;
+		private DoubleLinkedList.Node<E> nextNode;
+		private DoubleLinkedList.Node<E> lastReturned ;
+		
+		/**
+		 * 
+		 */
+		MyIter(){
+			this(0) ;
+		}
+		/**
+		 * @param index
+		 */
+		MyIter(int index){
+			
+			//Validate index
+			if (index < 0 || index > size) {
+				throw new IndexOutOfBoundsException("Invalid Index " + index) ;
+			}
+			
+			lastReturned = null ;
+			
+			if (index == size) {
+				this.cursor = size ;
+				nextNode = null ;
+			} else {
+				nextNode = head ;
+				for (cursor = 0 ; cursor < index ; cursor++)
+					nextNode = nextNode.next ;
+			}
+		}
+		
+		/** Inserts the specified element into the list (optional operation).
+		 * @param e
+		 */
+		public void add(E e) {
+			//Add to Empty List
+			if (head == null) {
+				head = new Node<E>(e) ;
+				tail = head ;
+			}
+			//Add to head
+			else if (nextNode == head) {
+				Node<E> newNode = new Node<E>(e) ;
+				newNode.next = nextNode ;
+				nextNode.previous = newNode ;
+				head = newNode ;
+			}
+			//Add to tail
+			else if (nextNode == null) {
+				Node<E> newNode = new Node<E>(e) ;
+				tail.next = newNode ;
+				newNode.previous = tail ;
+				tail = newNode ;
+			}
+			//Add to middle
+			else {
+				Node<E> newNode = new  Node<E>(e) ;
+				newNode.previous = nextNode.previous ;
+				nextNode.previous.next = newNode ;
+				newNode.next = nextNode ;
+				nextNode.previous = newNode ;
+			}
+			
+			size++ ;
+			cursor++ ;
+			lastReturned = null ;
+			
+		}
+		/**Returns true if this list iterator has more elements when traversing the list in the forward direction.
+		 * @return
+		 */
+		public boolean hasNext() {
+			return nextNode != null ;
+		}
+		/**Returns true if this list iterator has more elements when traversing the list in the reverse direction.
+		 * @return
+		 */
+		public boolean hasPrevious() {
+			return (nextNode == null && size != 0) || nextNode.previous != null ;
+		}
+		/**Returns the next element in the list and advances the cursor position.
+		 * @return
+		 */
+		public E next() {
+			if (!hasNext())
+				throw new NoSuchElementException() ;
+			lastReturned = nextNode.next ;
+			cursor++ ;
+			return lastReturned.data ;
+		}
+		/**Returns the index of the element that would be returned by a subsequent call to next().
+		 * @return
+		 */
+		public int nextIndex() {
+			return cursor + 1 ;
+		}
+		/**Returns the previous element in the list and moves the cursor position backwards.
+		 * @return
+		 */
+		public E previous() {
+			if(!hasPrevious())
+				throw new NoSuchElementException() ;
+			if (nextNode == null) 
+				nextNode = tail ;
+			else
+				nextNode = nextNode.previous ;
+			lastReturned = nextNode ;
+			cursor-- ;
+			return lastReturned.data ;
+		}
+		/**Returns the index of the element that would be returned by a subsequent call to previous().
+		 * @return
+		 */
+		public int previousIndex() {
+			return cursor - 1 ;
+		}
+		/**Removes from the list the last element that was returned by next() or previous() (optional operation).
+		 * 
+		 */
+		public void remove() {
+			
+		}
+		/**Replaces the last element returned by next() or previous() with the specified element (optional operation).
+		 * @param e
+		 */
+		public void set(E e) {
 
-  public E get(int index) 
-  { 	ListIterator<E> iter = listIterator(index); 
-      	return iter.next();
-  }  
-  public E getFirst() { return head.data;  }
-  public E getLast() { return tail.data;  }
-
-  public int size() {  return -1;  } // Fill Here
-
-  public E remove(int index)
-  {     E returnValue = null;
-        ListIterator<E> iter = listIterator(index);
-        if (iter.hasNext())
-        {   returnValue = iter.next();
-            iter.remove();
-        }
-        else {   throw new IndexOutOfBoundsException();  }
-        return returnValue;
-  }
-
-  public Iterator iterator() { return new ListIter(0);  }
-  public ListIterator listIterator() { return new ListIter(0);  }
-  public ListIterator listIterator(int index){return new ListIter(index);}
-  public ListIterator listIterator(ListIterator iter)
-  {     return new ListIter( (ListIter) iter);  }
-
-  // Inner Classes
-  private static class Node<E>
-  {     private E data;
-        private Node<E> next = null;
-        private Node<E> prev = null;
-
-        private Node(E dataItem)  //constructor
-        {   data = dataItem;   }
-  }  // end class Node
-
-  public class ListIter implements ListIterator<E> 
-  {
-        private Node<E> nextItem;      // the current node
-        private Node<E> lastItemReturned;   // the previous node
-        private int index = 0;   // 
-
-    public ListIter(int i)  // constructor for ListIter class
-    {   if (i < 0 || i > size)
-        {     throw new IndexOutOfBoundsException("Invalid index " + i); }
-        lastItemReturned = null;
- 
-        if (i == size)     // Special case of last item
-        {     index = size;     nextItem = null;      }
-        else          // start at the beginning
-        {   nextItem = head;
-            for (index = 0; index < i; index++)  nextItem = nextItem.next;   
-        }// end else
-    }  // end constructor
-
-    public ListIter(ListIter other)
-    {   nextItem = other.nextItem;
-        index = other.index;    }
-
-    public boolean hasNext() {   return true;    } // Fill Here
-    public boolean hasPrevious()
-    {   return false;   } // Fill Here
-    public int previousIndex() {  return 0;    } // Fill Here
-    public int nextIndex() {  return 0;    } // Fill here
-    public void set(E o)  { }  // not implemented
-    public void remove(){}      // not implemented
-
-    public E next()
-    {  
-        return lastItemReturned.data; // Fill Here 
-    }
-
-    public E previous() 
-    {  return lastItemReturned.data; // Fill Here 
-    }
-
-    public void add(E obj) {
-
-    // Fill Here
-    }
-  }// end of inner class ListIter
-}// end of class DoubleLinkedList
+		}
+	}
+	@Override
+	public Object[] toArray() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Object[] toArray(Object[] a) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public boolean containsAll(Collection c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean addAll(Collection c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean addAll(int index, Collection c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean removeAll(Collection c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean retainAll(Collection c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public List subList(int fromIndex, int toIndex) {
+		return null;
+	}
+}

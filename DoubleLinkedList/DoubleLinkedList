@@ -54,6 +54,8 @@ public class DoubleLinkedList<E> implements List<E> {
 		return indexOf(o) == -1 ? false : true ;
 	}
 	public E get(int index) {
+		if (index >= size)
+			throw new IndexOutOfBoundsException() ;
 		return listIterator(index).next() ;
 	}
 	public int indexOf(Object o) {
@@ -87,6 +89,8 @@ public class DoubleLinkedList<E> implements List<E> {
 		return head == null ;
 	}
 	public E remove(int index) {
+		if (index < 0 || index >= size)
+			throw new IndexOutOfBoundsException() ;
 		MyIter itr = new MyIter(index) ;
 		E tmp = (E) itr.next() ;
 		itr.remove() ;
@@ -101,6 +105,8 @@ public class DoubleLinkedList<E> implements List<E> {
 		return false ;
 	}
 	public E set(int index,E element) {
+		if (index < 0 || index >= size)
+			throw new IndexOutOfBoundsException() ;
 		MyIter itr = new MyIter(index) ;
 		E tmp = (E) itr.next() ;
 		itr.set(element) ;
@@ -110,12 +116,17 @@ public class DoubleLinkedList<E> implements List<E> {
 		return size ;
 	}
 	public String toString() {
-		StringBuilder output = new StringBuilder() ;
+		String prefix = "" ;
+		StringBuilder output = new StringBuilder();
 		MyIter itr = new MyIter() ;
 		output.append("[") ;
-		while (itr.nextIndex() < size) {
-			output.append(itr.next()) ;
-			output.append(", ") ;
+		while (itr.hasNext()) {
+			E nxt = itr.next() ;
+			if (nxt != null) {
+				output.append(prefix) ;
+				prefix = ", " ;
+				output.append(nxt.toString()) ;
+			}
 		}
 		output.append("]") ;
 		return output.toString() ;
@@ -178,7 +189,8 @@ public class DoubleLinkedList<E> implements List<E> {
 			} else {
 				nextNode = head ;
 				for (cursor = 0 ; cursor < index ; cursor++)
-					nextNode = nextNode.next ;
+					if (nextNode != null)
+						nextNode = nextNode.next ;
 			}
 		}
 		
@@ -188,11 +200,13 @@ public class DoubleLinkedList<E> implements List<E> {
 		public void add(E e) {
 			//Add to Empty List
 			if (head == null) {
+				System.out.println("Created a head");
 				head = new Node<E>(e) ;
 				tail = head ;
 			}
 			//Add to head
 			else if (nextNode == head) {
+				System.out.println("Added to head");
 				Node<E> newNode = new Node<E>(e) ;
 				newNode.next = nextNode ;
 				nextNode.previous = newNode ;
@@ -200,6 +214,7 @@ public class DoubleLinkedList<E> implements List<E> {
 			}
 			//Add to tail
 			else if (nextNode == null) {
+				System.out.println("Added to end");
 				Node<E> newNode = new Node<E>(e) ;
 				tail.next = newNode ;
 				newNode.previous = tail ;
@@ -207,6 +222,7 @@ public class DoubleLinkedList<E> implements List<E> {
 			}
 			//Add to middle
 			else {
+				System.out.println("Added to middle");
 				Node<E> newNode = new  Node<E>(e) ;
 				newNode.previous = nextNode.previous ;
 				nextNode.previous.next = newNode ;
@@ -237,7 +253,8 @@ public class DoubleLinkedList<E> implements List<E> {
 		public E next() {
 			if (!hasNext())
 				throw new NoSuchElementException() ;
-			lastReturned = nextNode.next ;
+			lastReturned = nextNode ;
+			nextNode = nextNode.next ;
 			cursor++ ;
 			return lastReturned.data ;
 		}
@@ -259,6 +276,8 @@ public class DoubleLinkedList<E> implements List<E> {
 				nextNode = nextNode.previous ;
 			lastReturned = nextNode ;
 			cursor-- ;
+			if (lastReturned == null)
+				return null ;
 			return lastReturned.data ;
 		}
 		/**Returns the index of the element that would be returned by a subsequent call to previous().

@@ -12,9 +12,7 @@ public class DoubleLinkedList<E> implements List<E> {
 	Node<E> head = null ,tail = null ;
 	int size = 0 ;
 	
-	/**
-	 * 
-	 */
+	//Double LinkedList functions
 	DoubleLinkedList() {}
 	public Iterator iterator(){
 		return new MyIter() ;
@@ -35,6 +33,7 @@ public class DoubleLinkedList<E> implements List<E> {
 	public void clear() {
 		head = null ;
 		tail = null ;
+		size = 0 ;
 	}
 	public boolean equals(Object o) {
 		if (o == this) {
@@ -133,7 +132,7 @@ public class DoubleLinkedList<E> implements List<E> {
 	}
 	
 	
-	
+	//Nested Classes
 	static class Node<E> {
 		
 		Node<E> previous, next ;
@@ -162,6 +161,7 @@ public class DoubleLinkedList<E> implements List<E> {
 		
 		
 		private int cursor ;
+		private boolean movingForward ;
 		private DoubleLinkedList.Node<E> nextNode;
 		private DoubleLinkedList.Node<E> lastReturned ;
 		
@@ -182,6 +182,7 @@ public class DoubleLinkedList<E> implements List<E> {
 			}
 			
 			lastReturned = null ;
+			movingForward = true ;
 			
 			if (index == size) {
 				this.cursor = size ;
@@ -200,13 +201,11 @@ public class DoubleLinkedList<E> implements List<E> {
 		public void add(E e) {
 			//Add to Empty List
 			if (head == null) {
-				System.out.println("Created a head");
 				head = new Node<E>(e) ;
 				tail = head ;
 			}
 			//Add to head
 			else if (nextNode == head) {
-				System.out.println("Added to head");
 				Node<E> newNode = new Node<E>(e) ;
 				newNode.next = nextNode ;
 				nextNode.previous = newNode ;
@@ -214,7 +213,6 @@ public class DoubleLinkedList<E> implements List<E> {
 			}
 			//Add to tail
 			else if (nextNode == null) {
-				System.out.println("Added to end");
 				Node<E> newNode = new Node<E>(e) ;
 				tail.next = newNode ;
 				newNode.previous = tail ;
@@ -222,7 +220,6 @@ public class DoubleLinkedList<E> implements List<E> {
 			}
 			//Add to middle
 			else {
-				System.out.println("Added to middle");
 				Node<E> newNode = new  Node<E>(e) ;
 				newNode.previous = nextNode.previous ;
 				nextNode.previous.next = newNode ;
@@ -245,7 +242,7 @@ public class DoubleLinkedList<E> implements List<E> {
 		 * @return
 		 */
 		public boolean hasPrevious() {
-			return (nextNode == null && size != 0) || nextNode.previous != null ;
+			return (nextNode != null || size > 0) && (nextNode == null || nextNode.previous != null) ;
 		}
 		/**Returns the next element in the list and advances the cursor position.
 		 * @return
@@ -256,13 +253,14 @@ public class DoubleLinkedList<E> implements List<E> {
 			lastReturned = nextNode ;
 			nextNode = nextNode.next ;
 			cursor++ ;
+			movingForward = true ;
 			return lastReturned.data ;
 		}
 		/**Returns the index of the element that would be returned by a subsequent call to next().
 		 * @return
 		 */
 		public int nextIndex() {
-			return cursor + 1 ;
+			return cursor ;
 		}
 		/**Returns the previous element in the list and moves the cursor position backwards.
 		 * @return
@@ -276,8 +274,10 @@ public class DoubleLinkedList<E> implements List<E> {
 				nextNode = nextNode.previous ;
 			lastReturned = nextNode ;
 			cursor-- ;
+			movingForward = false ;
 			if (lastReturned == null)
-				return null ;
+				return tail.data ;
+			
 			return lastReturned.data ;
 		}
 		/**Returns the index of the element that would be returned by a subsequent call to previous().
@@ -291,14 +291,52 @@ public class DoubleLinkedList<E> implements List<E> {
 		 */
 		public void remove() {
 			
+			if (lastReturned == null)
+				throw new IllegalStateException() ;
+			//lastReturned was the head
+			if (lastReturned == head) {
+				head = head.next ;
+			}
+			//Tail
+			else if (nextNode == null) {
+				tail = tail.previous ;
+				tail.next = null ;
+			}
+			//else if going forward
+			else if (movingForward && (nextNode != null)) {
+				if (nextNode.previous.previous != null) {
+					nextNode.previous = nextNode.previous.previous ;
+					nextNode.previous.next = nextNode ;
+				}
+				
+			}
+			//else if going backwards
+			else {
+				if (nextNode.next != null) {
+					nextNode.next.previous = nextNode.previous ;
+					nextNode.previous.next = nextNode.next ;
+				} else {
+
+					tail = nextNode.previous ;
+					tail.previous.next = tail ;
+					tail.next = null ;
+				}
+					
+			}
+			size-- ;
 		}
 		/**Replaces the last element returned by next() or previous() with the specified element (optional operation).
 		 * @param e
 		 */
 		public void set(E e) {
-
+			if (lastReturned == null)
+				throw new IllegalStateException() ;
+			lastReturned.data = e ;
 		}
 	}
+	
+	
+	//Unemplemented Functions
 	@Override
 	public Object[] toArray() {
 		// TODO Auto-generated method stub

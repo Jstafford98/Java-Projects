@@ -1,0 +1,45 @@
+/**
+ * @author Jordan Stafford
+ */
+
+import java.util.ArrayList;
+import java.util.EmptyStackException;
+
+public class ArrayListStack<E> implements StackInterface<E> {
+	
+	ArrayList<E> theStack ;
+	
+	/**
+	 * Creates a new ArrayListStack object
+	 */
+	ArrayListStack(){
+		theStack = new ArrayList<E>() ;
+	}
+	
+	
+	@Override
+	public boolean empty() {
+		return theStack.size() == 0;
+	}
+
+	@Override
+	public E peek() {
+		if (empty())
+			throw new EmptyStackException() ;
+		return theStack.get(theStack.size()-1);
+	}
+
+	@Override
+	public E pop() {
+		if (empty())
+			throw new EmptyStackException() ;
+		return theStack.remove(theStack.size()-1);
+	}
+
+	@Override
+	public E push(E obj) {
+		theStack.add(obj) ;
+		return theStack.get(theStack.size()-1) ;
+	}
+
+}

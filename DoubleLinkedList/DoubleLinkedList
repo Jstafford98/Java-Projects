@@ -13,28 +13,48 @@ public class DoubleLinkedList<E> implements List<E> {
 	int size = 0 ;
 	
 	//Double LinkedList functions
-	DoubleLinkedList() {}
+	/**Creates a Iterator object at the start of the list
+	 * @return an MyIter object
+	 */
 	public Iterator iterator(){
 		return new MyIter() ;
 	}
+	/**Creates an iterator object at the start of the list
+	 * @return a MyIter object
+	 */
 	public MyIter listIterator(){
 		return new MyIter() ;
 	}
+	/**Creates a listIterator object at a given index
+	 * @index the index to put the listIterator at
+	 * @return a MyIter object
+	 */
 	public MyIter listIterator(int index){
 		return new MyIter(index) ;
 	}
+	/**Inserts the specificed element after the next element
+	 * @param e - the value to insert
+	 */
 	public boolean add(E e) {
 		listIterator(size).add(e) ;
 		return true ;
 	}
+	/**Inserts the specified element at the specified position in this list (optional operation).
+	 * @param index - the index to insert e at
+	 * @param e - the value to insert
+	 */
 	public void add(int index, E e) {
 		listIterator(index).add(e) ;
 	}
+	/**Removes all of the elements from this list (optional operation).
+	 * 
+	 */
 	public void clear() {
 		head = null ;
 		tail = null ;
 		size = 0 ;
 	}
+	@Override
 	public boolean equals(Object o) {
 		if (o == this) {
 			return true ;
@@ -49,14 +69,26 @@ public class DoubleLinkedList<E> implements List<E> {
 		}
 		return true ;
 	}
+	/**Returns true if this list contains the specified element.
+	 * @param o - the object we are looking for
+	 * @return if object is in this list
+	 */
 	public boolean contains(Object o) {
 		return indexOf(o) == -1 ? false : true ;
 	}
+	/**Returns the element at the specified position in this list.
+	 * @param index - the index to get
+	 * @return the object at index
+	 */
 	public E get(int index) {
 		if (index >= size)
 			throw new IndexOutOfBoundsException() ;
 		return listIterator(index).next() ;
 	}
+	/**Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
+	 * @param o - object we are looking for
+	 * @return index of object
+	 */
 	public int indexOf(Object o) {
 		MyIter itr = new MyIter() ;
 		E other = (E) o ;
@@ -70,6 +102,10 @@ public class DoubleLinkedList<E> implements List<E> {
 		}
 		return foundIdx ;
 	}
+	/**	Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element.
+	 * @param o - object we are looking for
+	 * @return - index of object
+	 */
 	public int lastIndexOf(Object o) {
 		MyIter itr = new MyIter() ;
 		E other = (E) o ;
@@ -84,9 +120,16 @@ public class DoubleLinkedList<E> implements List<E> {
 		}
 		return foundIdx  ;
 	}
+	/**	Returns true if this list contains no elements.
+	 * @return if list contains no elements
+	 */
 	public boolean isEmpty() {
 		return head == null ;
 	}
+	/**Removes the element at the specified position in this list (optional operation).
+	 * @param index - index to remove
+	 * @return the object that was removed
+	 */
 	public E remove(int index) {
 		if (index < 0 || index >= size)
 			throw new IndexOutOfBoundsException() ;
@@ -95,6 +138,10 @@ public class DoubleLinkedList<E> implements List<E> {
 		itr.remove() ;
 		return tmp ;
 	}
+	/**Removes the first occurrence of the specified element from this list, if it is present (optional operation).
+	 * @param o - object we are looking for
+	 * @return the boolean return whether or not the object was removed
+	 */
 	public boolean remove(Object o) {
 		int idx = indexOf(o) ;
 		if (idx != -1) {
@@ -103,6 +150,11 @@ public class DoubleLinkedList<E> implements List<E> {
 		}
 		return false ;
 	}
+	/** Replaces the element at the specified position in this list with the specified element (optional operation).
+	 * @param index - index of the value to set
+	 * @param element - element to set the value to
+	 * @return the old value
+	 */
 	public E set(int index,E element) {
 		if (index < 0 || index >= size)
 			throw new IndexOutOfBoundsException() ;
@@ -111,9 +163,13 @@ public class DoubleLinkedList<E> implements List<E> {
 		itr.set(element) ;
 		return tmp ;
 	}
+	/**	Returns the number of elements in this list.
+	 * @return the size of this list
+	 */
 	public int size() {
 		return size ;
 	}
+	@Override
 	public String toString() {
 		String prefix = "" ;
 		StringBuilder output = new StringBuilder();
@@ -138,8 +194,8 @@ public class DoubleLinkedList<E> implements List<E> {
 		Node<E> previous, next ;
 		E data ;
 		
-		/**
-		 * @param data
+		/** Creates a new node
+		 * @param data - the data the new node will store
 		 */
 		Node(E data){
 			this.data = data ;
@@ -147,9 +203,9 @@ public class DoubleLinkedList<E> implements List<E> {
 			next = null ;
 		}
 		/**
-		 * @param data
-		 * @param prev
-		 * @param nxt
+		 * @param data - the data the new node will store
+		 * @param prev - the previous node before this new node
+		 * @param nxt - the node after this node
 		 */
 		Node(E data, Node<E> prev, Node<E> nxt){
 			this.data = data ;
@@ -165,14 +221,14 @@ public class DoubleLinkedList<E> implements List<E> {
 		private DoubleLinkedList.Node<E> nextNode;
 		private DoubleLinkedList.Node<E> lastReturned ;
 		
-		/**
+		/** Creates an iterator at the start of the list
 		 * 
 		 */
 		MyIter(){
 			this(0) ;
 		}
-		/**
-		 * @param index
+		/** Creates an iterator a given index
+		 * @param index - the index to put the iterator between
 		 */
 		MyIter(int index){
 			
@@ -196,7 +252,7 @@ public class DoubleLinkedList<E> implements List<E> {
 		}
 		
 		/** Inserts the specified element into the list (optional operation).
-		 * @param e
+		 * @param e - the element to insert
 		 */
 		public void add(E e) {
 			//Add to Empty List
@@ -233,19 +289,19 @@ public class DoubleLinkedList<E> implements List<E> {
 			
 		}
 		/**Returns true if this list iterator has more elements when traversing the list in the forward direction.
-		 * @return
+		 * @return - boolean representing if there is a next value
 		 */
 		public boolean hasNext() {
 			return nextNode != null ;
 		}
 		/**Returns true if this list iterator has more elements when traversing the list in the reverse direction.
-		 * @return
+		 * @return - boolean representing if there is a previous value
 		 */
 		public boolean hasPrevious() {
 			return (nextNode != null || size > 0) && (nextNode == null || nextNode.previous != null) ;
 		}
 		/**Returns the next element in the list and advances the cursor position.
-		 * @return
+		 * @return - the next element to return
 		 */
 		public E next() {
 			if (!hasNext())
@@ -257,13 +313,13 @@ public class DoubleLinkedList<E> implements List<E> {
 			return lastReturned.data ;
 		}
 		/**Returns the index of the element that would be returned by a subsequent call to next().
-		 * @return
+		 * @return - the next index
 		 */
 		public int nextIndex() {
 			return cursor ;
 		}
 		/**Returns the previous element in the list and moves the cursor position backwards.
-		 * @return
+		 * @return - the previous element in the list
 		 */
 		public E previous() {
 			if(!hasPrevious())
@@ -281,7 +337,7 @@ public class DoubleLinkedList<E> implements List<E> {
 			return lastReturned.data ;
 		}
 		/**Returns the index of the element that would be returned by a subsequent call to previous().
-		 * @return
+		 * @return - the index of the next call to previous
 		 */
 		public int previousIndex() {
 			return cursor - 1 ;
@@ -326,7 +382,7 @@ public class DoubleLinkedList<E> implements List<E> {
 			size-- ;
 		}
 		/**Replaces the last element returned by next() or previous() with the specified element (optional operation).
-		 * @param e
+		 * @param e - the element to replace the last returned element with
 		 */
 		public void set(E e) {
 			if (lastReturned == null)

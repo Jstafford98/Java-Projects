@@ -1,0 +1,163 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Queue;
+
+public class CircularArrayQueue<E> implements Queue<E> {
+	
+	private static final int DEFAULT_CAPACITY = 10 ;
+	
+	ArrayList<E> theQueue ;
+	int head, tail, cursor, capacity ;
+	
+	/** Creates a new CircularArrayQueue object
+	 * 
+	 */
+	public CircularArrayQueue() {
+		this(DEFAULT_CAPACITY) ;
+	}
+	/**
+	 * Creates a new CircularArrayQueue object of a given capacity
+	 * @param capacity - the capacity of the queue
+	 */
+	public CircularArrayQueue(int capacity) {
+		theQueue = new ArrayList<E>() ;
+		this.capacity = capacity ;
+	}
+	@Override
+	public boolean add(E e) {
+		if (theQueue.size() == capacity)
+			reallocate() ;
+		theQueue.add(e) ;
+		System.out.println(e);
+		return true;
+	}
+	@Override
+	public E element() {
+		if (theQueue.isEmpty())
+			throw new NoSuchElementException() ;
+		return theQueue.get(head);
+	}
+	@Override
+	public boolean offer(E e) {
+		if (theQueue.size() == capacity)
+			reallocate() ;
+		theQueue.add(cursor,e) ;
+		return true;
+	}
+	@Override
+	public E peek() {
+		if (theQueue.isEmpty())
+			return null ;
+		return theQueue.get(head);
+	}
+	@Override
+	public E poll() {
+		if (theQueue.isEmpty())
+			return null ;
+		E out = theQueue.remove(head) ;
+		return out;
+	}
+	@Override
+	public E remove() {
+		if (theQueue.isEmpty())
+			throw new NoSuchElementException() ;
+	 	E out = theQueue.remove(head) ;
+		return out;
+	}
+	@Override
+	public String toString() {
+		StringBuilder output = new StringBuilder() ;
+		for (E e : theQueue)
+			output.append(e.toString()) ;
+		return output.toString() ;
+	}
+	private void reallocate(){
+		capacity *= 2 ;
+		ArrayList<E> newList = new ArrayList<E>() ;
+		for (E e : theQueue)
+			newList.add(e) ;
+		theQueue = newList ;
+		
+	}
+
+	//Unimplemented Methods
+
+	@Override
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean contains(Object o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Iterator iterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object[] toArray() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object[] toArray(Object[] a) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean remove(Object o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean containsAll(Collection c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addAll(Collection c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removeAll(Collection c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean retainAll(Collection c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
+	
+	
+}

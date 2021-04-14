@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -6,10 +5,10 @@ import java.util.Queue;
 
 public class CircularArrayQueue<E> implements Queue<E> {
 	
-	private static final int DEFAULT_CAPACITY = 10 ;
+	private static final int DEFAULT_CAPACITY = 5 ;
 	
-	ArrayList<E> theQueue ;
-	int head, tail, cursor, capacity ;
+	E[] theQueue ;
+	int front, back, size, capacity ;
 	
 	/** Creates a new CircularArrayQueue object
 	 * 
@@ -22,64 +21,121 @@ public class CircularArrayQueue<E> implements Queue<E> {
 	 * @param capacity - the capacity of the queue
 	 */
 	public CircularArrayQueue(int capacity) {
-		theQueue = new ArrayList<E>() ;
+		theQueue = (E[]) new Object[capacity] ;
 		this.capacity = capacity ;
+		size = 0 ;
+		front = -1 ;
+		back = -1 ;
 	}
 	@Override
 	public boolean add(E e) {
-		if (theQueue.size() == capacity)
+		if (front == -1) {
+			front = 0 ;
+			size = 1 ;
+		}
+		if (size == capacity)
 			reallocate() ;
-		theQueue.add(e) ;
-		System.out.println(e);
+		else if (back == capacity-1)
+			theQueue[(++back%capacity)] = e ;
+		else
+			theQueue[++back] = e ;
+		size++ ;
 		return true;
 	}
 	@Override
 	public E element() {
-		if (theQueue.isEmpty())
+		if (front == -1)
 			throw new NoSuchElementException() ;
-		return theQueue.get(head);
+		return theQueue[front];
 	}
 	@Override
 	public boolean offer(E e) {
-		if (theQueue.size() == capacity)
+		System.out.println("Attempting to offer " + e);
+		if (front == -1)
+			front = 0 ;
+		else if (size == capacity)
 			reallocate() ;
-		theQueue.add(cursor,e) ;
+		else if (back == capacity-1) {
+			theQueue[(++back%capacity)] = e ;
+			size++ ;
+			return true ;
+		}
+		theQueue[++back] = e ;
+		size++ ;
 		return true;
 	}
 	@Override
 	public E peek() {
-		if (theQueue.isEmpty())
+		if (front == -1)
 			return null ;
-		return theQueue.get(head);
+		return theQueue[front];
 	}
 	@Override
 	public E poll() {
-		if (theQueue.isEmpty())
+		if (front == -1) 
 			return null ;
-		E out = theQueue.remove(head) ;
-		return out;
+		else if (size == 1) {
+			E out = theQueue[front] ;
+			theQueue[front] = null ;
+			front = -1 ;
+			back = -1 ;
+			size = 0 ;
+			return out ;
+		}
+		return removeAndShift(front) ;
 	}
 	@Override
 	public E remove() {
-		if (theQueue.isEmpty())
+		if (front == -1)
 			throw new NoSuchElementException() ;
-	 	E out = theQueue.remove(head) ;
-		return out;
+		else if (size == 1) {
+			E out = theQueue[front] ;
+			theQueue[front] = null ;
+			front = -1 ;
+			back = -1 ;
+			size = 0 ;
+			return out ;
+		}
+	 	return removeAndShift(front) ;
 	}
-	@Override
+	@Override 
 	public String toString() {
 		StringBuilder output = new StringBuilder() ;
-		for (E e : theQueue)
-			output.append(e.toString()) ;
+		for (int i = front ; i < capacity ; i++){
+			if (i >= capacity-1) {
+				output.append("\nIndex: " + i % capacity + ": " + theQueue[(i % capacity)]) ;
+			}else { 
+				output.append("\nIndex: " + i + ": " + theQueue[i]) ;
+			}
+			//if (i != capacity -1)
+			//	output.append(", ") ;
+		}
 		return output.toString() ;
 	}
 	private void reallocate(){
 		capacity *= 2 ;
-		ArrayList<E> newList = new ArrayList<E>() ;
-		for (E e : theQueue)
-			newList.add(e) ;
-		theQueue = newList ;
-		
+		E[] newQueue = (E[]) new Object[capacity] ;
+
+		for (int i = front ; i < size ; i++) {
+			if (i >= capacity) {
+				newQueue[(i % capacity)-1] = theQueue[(i%capacity)-1] ;
+				continue ;
+			}
+			newQueue[i] = theQueue[i] ;
+		}
+		theQueue = newQueue ;
+	}
+	private E removeAndShift(int idx) {
+		E out = theQueue[idx] ;
+		if (size == 1) {
+			front = -1 ;
+			back = -1 ;
+			size = 0 ;
+			return out ;
+		}
+		theQueue[idx++] = null ;
+		front = idx ;
+		return out ;
 	}
 
 	//Unimplemented Methods
@@ -154,10 +210,6 @@ public class CircularArrayQueue<E> implements Queue<E> {
 	public void clear() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	
-	
-	
+	}	
 	
 }
